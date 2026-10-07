@@ -59,7 +59,11 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
     }
 
     try {
-      await onSubmit(formData);
+      await onSubmit({
+        ...formData,
+        startDate: formData.startDate ? new Date(formData.startDate).toISOString() : '',
+        endDate: formData.endDate ? new Date(formData.endDate).toISOString() : ''
+      });
     } catch (err: any) {
       setError(err.message || 'An error occurred while saving the project.');
     }
