@@ -77,7 +77,10 @@ export const TaskForm = ({ initialData, initialProjectId, onSubmit, isSubmitting
     }
 
     try {
-      await onSubmit(formData);
+      await onSubmit({
+        ...formData,
+        dueDate: formData.dueDate ? new Date(formData.dueDate).toISOString() : ''
+      });
     } catch (err: any) {
       setError(err.message || 'An error occurred while saving the task.');
     }
