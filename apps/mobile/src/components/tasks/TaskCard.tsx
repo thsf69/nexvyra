@@ -1,6 +1,6 @@
 import { useTheme } from '../../context/ThemeContext';
 import { ThemeTokens } from '../../theme/tokens';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Task } from '../../types';
 import { TaskStatusBadge } from './TaskStatusBadge';
