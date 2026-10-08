@@ -186,7 +186,7 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
         disabled={isSubmitting}
       >
         {isSubmitting ? (
-          <ActivityIndicator color="#19243B" />
+          <ActivityIndicator color="#FFFFFF" />
         ) : (
           <Text style={styles.submitButtonText}>{submitLabel}</Text>
         )}
@@ -217,18 +217,18 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#DCE4F6',
+    color: '#263E59',
     marginBottom: 6,
   },
   input: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   textArea: {
     minHeight: 100,
@@ -243,9 +243,9 @@ const styles = StyleSheet.create({
     gap: 8, // Using gap if RN supports it, otherwise margin
   },
   statusButton: {
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderWidth: 1,
-    borderColor: '#2C3852',
+    borderColor: '#DCE5F0',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 6,
@@ -253,19 +253,19 @@ const styles = StyleSheet.create({
   },
   statusButtonActive: {
     backgroundColor: '#e0e7ff',
-    borderColor: '#7254D7',
+    borderColor: '#1769B1',
   },
   statusText: {
-    color: '#A6B3CC',
+    color: '#637991',
     fontSize: 14,
     fontWeight: '500',
     textTransform: 'capitalize',
   },
   statusTextActive: {
-    color: '#7254D7',
+    color: '#1769B1',
   },
   dateButton: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
@@ -274,7 +274,7 @@ const styles = StyleSheet.create({
   },
   dateButtonText: {
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   clearDateText: {
     color: '#ef4444',
@@ -282,7 +282,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   submitButton: {
-    backgroundColor: '#7254D7',
+    backgroundColor: '#1769B1',
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
@@ -293,7 +293,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   submitButtonText: {
-    color: '#19243B',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
