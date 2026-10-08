@@ -67,7 +67,7 @@ export const TaskEditScreen = () => {
   if (loading) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#7254D7" />
+        <ActivityIndicator size="large" color="#1769B1" />
       </View>
     );
   }
@@ -104,7 +104,7 @@ export const TaskEditScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   scrollContainer: {
     padding: 16,
@@ -114,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   errorText: {
     fontSize: 16,
@@ -125,12 +125,12 @@ const styles = StyleSheet.create({
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderRadius: 6,
   },
   retryText: {
     fontSize: 14,
-    color: '#A6B3CC',
+    color: '#637991',
     fontWeight: '500',
   },
 });
