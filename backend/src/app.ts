@@ -11,11 +11,27 @@ const app = express();
 app.use(helmet());
 
 // Secure CORS configuration
-const corsOrigins = process.env.NODE_ENV === 'production'
+const envOrigins = process.env.NODE_ENV === 'production'
   ? (process.env.CORS_ORIGIN || '').split(',')
   : '*'; // allow all in dev/test
 
-app.use(cors({ origin: corsOrigins }));
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // Allow non-browser requests
+    if (envOrigins === '*') return callback(null, true);
+    
+    if (envOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+
+    // Allow dynamic Vercel preview deployments for NEXVYRA
+    if (origin.match(/^https:\/\/nexvyra[a-zA-Z0-9-]*\.vercel\.app$/)) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  }
+}));
 
 // Body parsing
 app.use(express.json());
