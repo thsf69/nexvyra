@@ -128,7 +128,7 @@ export const ProjectsScreen = () => {
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchInput}
-            placeholder="Search projects..."
+            placeholder="Search projects..." placeholderTextColor={tokens.textSecondary}
             value={searchQuery}
             onChangeText={setSearchQuery}
             accessibilityLabel="Search projects"
@@ -213,8 +213,10 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
-    borderRadius: 8,
+    backgroundColor: (isDark ? '#273149' : '#F0F0F8'),
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: tokens.border,
     paddingHorizontal: 12,
     marginBottom: 12,
   },
@@ -240,12 +242,12 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 9999,
-    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
+    backgroundColor: (isDark ? '#273149' : '#F0F0F8'),
     marginRight: 8,
     marginBottom: 8,
   },
   filterPillActive: {
-    backgroundColor: (isDark ? '#284563' : (isDark ? '#284563' : '#E8F2FC')),
+    backgroundColor: (isDark ? '#30264B' : (isDark ? '#30264B' : '#F0E9FF')),
   },
   filterText: {
     fontSize: 13,
@@ -260,10 +262,10 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     flexGrow: 1,
   },
   centerContainer: {
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
+    minHeight: 190,
   },
   emptyText: {
     fontSize: 16,
@@ -279,7 +281,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
+    backgroundColor: (isDark ? '#273149' : '#F0F0F8'),
     borderRadius: 6,
   },
   retryText: {
@@ -305,7 +307,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   },
   fabText: {
     fontSize: 28,
-    color: tokens.surface,
+    color: '#FFFFFF',
     lineHeight: 32,
   },
 });
