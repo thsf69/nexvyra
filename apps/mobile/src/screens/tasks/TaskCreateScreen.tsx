@@ -58,7 +58,7 @@ export const TaskCreateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   scrollContainer: {
     padding: 16,
