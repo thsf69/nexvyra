@@ -53,7 +53,7 @@ export const ProjectCreateScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   scrollContainer: {
     padding: 16,
