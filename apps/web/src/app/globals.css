@@ -3,25 +3,25 @@
 @tailwind utilities;
 
 :root {
-  --background: #F4F7FB;
+  --background: #F7F7FC;
   --surface: #FFFFFF;
-  --primary: #1769B1;
-  --text: #162B46;
-  --text-secondary: #637991;
-  --success: #13877E;
-  --iris: #2C7DC3;
-  --border: #DCE5F0;
+  --primary: #7652DB;
+  --text: #192139;
+  --text-secondary: #66718A;
+  --success: #169F82;
+  --iris: #9B79F2;
+  --border: #E5E5F0;
 }
 
 [data-theme='dark'] {
-  --background: #0B1526;
-  --surface: #16263B;
-  --primary: #218FD2;
-  --text: #F1F7FF;
-  --text-secondary: #A5BCD1;
-  --success: #5EEAD4;
-  --iris: #8996FF;
-  --border: #2A3F54;
+  --background: #101729;
+  --surface: #1B253B;
+  --primary: #B79AFF;
+  --text: #F7F7FF;
+  --text-secondary: #A9B2C8;
+  --success: #64D7B4;
+  --iris: #B79AFF;
+  --border: #303B53;
 }
 
 body {
@@ -40,5 +40,7 @@ body {
 :root { --glass-glow: rgba(108, 92, 231, .12); }
 [data-theme='dark'] { --glass-glow: rgba(139, 92, 246, .22); }
 .nex-glass { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 12px 40px var(--glass-glow); }
-.nex-gradient { background: linear-gradient(120deg,#1769B1,#2586CB); }
+.nex-gradient { background: linear-gradient(120deg,#7652DB,#9B79F2); }
 .nex-gradient-text { color: var(--primary); }
+.nex-productivity { background: linear-gradient(130deg,#241B43 0%,#36275F 58%,#503184 100%); border: 1px solid #58417E; box-shadow: 0 16px 44px rgba(58,39,112,.18); }
+.nex-productivity-track { background: rgba(255,255,255,.2); }
