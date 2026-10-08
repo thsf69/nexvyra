@@ -130,7 +130,7 @@ export const LoginScreen = () => {
           accessibilityLabel={isSubmitting ? 'Signing in' : 'Sign in'}
         >
           {isSubmitting ? (
-            <ActivityIndicator color="#fff" />
+            <ActivityIndicator color="#19243B" />
           ) : (
             <Text style={styles.buttonText}>Sign in</Text>
           )}
@@ -150,7 +150,7 @@ export const LoginScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   formContainer: {
     flex: 1,
@@ -164,13 +164,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F7F8FF',
     marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#6b7280',
+    color: '#A6B3CC',
     textAlign: 'center',
   },
   errorContainer: {
@@ -192,21 +192,21 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
+    color: '#DCE4F6',
     marginBottom: 6,
   },
   input: {
-    backgroundColor: '#fff',
+    backgroundColor: '#19243B',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
-    color: '#111827',
+    color: '#F7F8FF',
   },
   button: {
-    backgroundColor: '#4f46e5',
+    backgroundColor: '#7254D7',
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   buttonText: {
-    color: '#fff',
+    color: '#19243B',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -228,11 +228,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   footerText: {
-    color: '#6b7280',
+    color: '#A6B3CC',
     fontSize: 14,
   },
   linkText: {
-    color: '#4f46e5',
+    color: '#7254D7',
     fontSize: 14,
     fontWeight: '500',
   },
