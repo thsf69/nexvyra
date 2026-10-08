@@ -7,6 +7,12 @@ import { errorHandler, notFoundHandler } from './middleware/errorHandler';
 
 const app = express();
 
+// Render terminates HTTPS at one trusted reverse proxy. Use the real client IP
+// for rate limiting rather than grouping visitors under the proxy address.
+if (process.env.NODE_ENV === 'production') {
+  app.set('trust proxy', 1);
+}
+
 // Security middleware
 app.use(helmet());
 
@@ -21,10 +27,11 @@ app.use(cors({ origin: corsOrigins }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Rate limiting (basic global limit)
+// General API protection; authentication has a separate stricter limiter
+// in auth.routes.ts (20 attempts per 15 minutes).
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100,
+  max: 500,
   message: 'Too many requests from this IP, please try again after 15 minutes'
 });
 app.use(limiter);
