@@ -42,8 +42,8 @@ export default function NewTaskPage() {
   return (
     <AppShell>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Create Task</h1>
-        <Suspense fallback={<div className="p-8 text-center text-gray-500 animate-pulse">Loading form...</div>}>
+        <h1 className="text-3xl font-bold text-text mb-8">Create Task</h1>
+        <Suspense fallback={<div className="p-8 text-center text-text-secondary animate-pulse">Loading form...</div>}>
           <NewTaskContent />
         </Suspense>
       </div>

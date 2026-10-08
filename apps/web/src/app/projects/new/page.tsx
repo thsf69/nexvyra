@@ -26,7 +26,7 @@ export default function NewProjectPage() {
   return (
     <AppShell>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Create Project</h1>
+        <h1 className="text-3xl font-bold text-text mb-8">Create Project</h1>
         <ProjectForm
           onSubmit={handleSubmit}
           isSubmitting={isSubmitting}

@@ -70,7 +70,7 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 bg-white p-6 rounded-xl shadow-sm border border-gray-100">
+    <form onSubmit={handleSubmit} className="space-y-6 bg-surface p-6 rounded-xl shadow-sm border border-border">
       {error && (
         <div className="p-3 text-sm text-red-700 bg-red-50 rounded-md border border-red-100">
           {error}
@@ -78,7 +78,7 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
       )}
 
       <div>
-        <label htmlFor="name" className="block text-sm font-medium text-gray-700">Project Name *</label>
+        <label htmlFor="name" className="block text-sm font-medium text-text">Project Name *</label>
         <input
           type="text"
           id="name"
@@ -86,31 +86,31 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
           value={formData.name}
           onChange={handleChange}
           required
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
         />
       </div>
 
       <div>
-        <label htmlFor="description" className="block text-sm font-medium text-gray-700">Description</label>
+        <label htmlFor="description" className="block text-sm font-medium text-text">Description</label>
         <textarea
           id="description"
           name="description"
           rows={4}
           value={formData.description}
           onChange={handleChange}
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
         />
       </div>
 
       <div>
-        <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status *</label>
+        <label htmlFor="status" className="block text-sm font-medium text-text">Status *</label>
         <select
           id="status"
           name="status"
           value={formData.status}
           onChange={handleChange}
           required
-          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+          className="mt-1 block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
         >
           <option value="NOT_STARTED">Not Started</option>
           <option value="IN_PROGRESS">In Progress</option>
@@ -120,7 +120,7 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         <div>
-          <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">Start Date *</label>
+          <label htmlFor="startDate" className="block text-sm font-medium text-text">Start Date *</label>
           <input
             type="date"
             id="startDate"
@@ -128,12 +128,12 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
             value={formData.startDate}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
         </div>
 
         <div>
-          <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">End Date *</label>
+          <label htmlFor="endDate" className="block text-sm font-medium text-text">End Date *</label>
           <input
             type="date"
             id="endDate"
@@ -141,23 +141,23 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
             value={formData.endDate}
             onChange={handleChange}
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+            className="mt-1 block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
         </div>
       </div>
 
-      <div className="flex justify-end space-x-3 pt-4 border-t border-gray-200">
+      <div className="flex justify-end space-x-3 pt-4 border-t border-border">
         <button
           type="button"
           onClick={() => router.back()}
-          className="px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          className="px-4 py-2 border border-border shadow-sm text-sm font-medium rounded-md text-text bg-surface hover:bg-background focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-70"
+          className="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary disabled:opacity-70"
         >
           {isSubmitting ? 'Saving...' : submitLabel}
         </button>

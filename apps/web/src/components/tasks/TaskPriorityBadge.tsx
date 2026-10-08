@@ -2,7 +2,7 @@ import React from 'react';
 import { TaskPriority } from '@/types';
 
 export const TaskPriorityBadge = ({ priority }: { priority: TaskPriority }) => {
-  let styles = 'bg-gray-100 text-gray-800';
+  let styles = 'bg-gray-100 text-text';
   let label = 'Unknown';
 
   switch (priority) {
@@ -11,7 +11,7 @@ export const TaskPriorityBadge = ({ priority }: { priority: TaskPriority }) => {
       label = 'Low';
       break;
     case 'MEDIUM':
-      styles = 'bg-yellow-100 text-yellow-800 border border-yellow-200';
+      styles = 'bg-yellow-500/20 text-yellow-600 dark:text-yellow-400 border border-yellow-200';
       label = 'Medium';
       break;
     case 'HIGH':

@@ -2,12 +2,12 @@ import React from 'react';
 import { TaskStatus } from '@/types';
 
 export const TaskStatusBadge = ({ status }: { status: TaskStatus }) => {
-  let styles = 'bg-gray-100 text-gray-800';
+  let styles = 'bg-gray-100 text-text';
   let label = 'Unknown';
 
   switch (status) {
     case 'PENDING':
-      styles = 'bg-gray-100 text-gray-800 border border-gray-200';
+      styles = 'bg-gray-100 text-text border border-border';
       label = 'Pending';
       break;
     case 'IN_PROGRESS':
@@ -15,7 +15,7 @@ export const TaskStatusBadge = ({ status }: { status: TaskStatus }) => {
       label = 'In Progress';
       break;
     case 'COMPLETED':
-      styles = 'bg-green-100 text-green-800 border border-green-200';
+      styles = 'bg-success/20 text-success border border-green-200';
       label = 'Completed';
       break;
   }

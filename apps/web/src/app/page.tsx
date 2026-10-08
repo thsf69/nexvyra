@@ -5,7 +5,7 @@
 export default function Home() {
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-gray-500 animate-pulse">Loading NEXVYRA...</div>
+      <div className="text-text-secondary animate-pulse">Loading NEXVYRA...</div>
     </div>
   );
 }

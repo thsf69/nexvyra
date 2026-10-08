@@ -85,7 +85,7 @@ function ProjectsListContent() {
 
   return (
     <>
-      <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100 mb-6">
+      <div className="bg-surface p-4 rounded-xl shadow-sm border border-border mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <label htmlFor="search" className="sr-only">Search projects</label>
@@ -95,7 +95,7 @@ function ProjectsListContent() {
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
             />
           </div>
           <div className="sm:w-64">
@@ -104,7 +104,7 @@ function ProjectsListContent() {
               id="status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
             >
               <option value="">All Statuses</option>
               <option value="NOT_STARTED">Not Started</option>
@@ -117,7 +117,7 @@ function ProjectsListContent() {
               <button
                 type="button"
                 onClick={clearFilters}
-                className="text-sm font-medium text-gray-500 hover:text-gray-900 px-2 py-1"
+                className="text-sm font-medium text-text-secondary hover:text-text px-2 py-1"
               >
                 Clear filters
               </button>
@@ -141,7 +141,7 @@ function ProjectsListContent() {
                 .catch((err: any) => setError(err.message || 'Failed to load projects'))
                 .finally(() => setIsLoading(false));
             }}
-            className="ml-4 px-3 py-1.5 border border-red-200 rounded-md shadow-sm text-sm font-medium text-red-700 bg-white hover:bg-red-50"
+            className="ml-4 px-3 py-1.5 border border-red-200 rounded-md shadow-sm text-sm font-medium text-red-700 bg-surface hover:bg-red-50"
           >
             Retry
           </button>
@@ -149,29 +149,29 @@ function ProjectsListContent() {
       )}
 
       {isLoading ? (
-        <div className="text-center py-12 text-gray-500 animate-pulse">Loading projects...</div>
+        <div className="text-center py-12 text-text-secondary animate-pulse">Loading projects...</div>
       ) : projects.length === 0 ? (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-12 text-center">
+        <div className="bg-surface rounded-xl shadow-sm border border-border p-12 text-center">
           {searchTerm || statusFilter ? (
-            <p className="text-gray-500">No projects match your current filters.</p>
+            <p className="text-text-secondary">No projects match your current filters.</p>
           ) : (
             <div>
-              <p className="text-gray-500 mb-4">No projects yet.</p>
-              <Link href="/projects/new" className="text-indigo-600 hover:text-indigo-900 font-medium">
+              <p className="text-text-secondary mb-4">No projects yet.</p>
+              <Link href="/projects/new" className="text-primary hover:text-primary font-medium">
                 Create your first project to get started
               </Link>
             </div>
           )}
         </div>
       ) : (
-        <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-          <ul className="divide-y divide-gray-200">
+        <div className="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
+          <ul className="divide-y divide-border">
             {projects.map((project) => (
               <li key={project.id}>
                 <div className="px-4 py-4 sm:px-6 flex items-center justify-between">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <p className="text-sm font-medium text-indigo-600 truncate">
+                      <p className="text-sm font-medium text-primary truncate">
                         {project.name}
                       </p>
                       <div className="ml-2 flex-shrink-0">
@@ -180,15 +180,15 @@ function ProjectsListContent() {
                     </div>
                     <div className="mt-2 flex flex-col sm:flex-row sm:justify-between">
                       <div className="sm:flex">
-                        <p className="flex items-center text-sm text-gray-500">
+                        <p className="flex items-center text-sm text-text-secondary">
                           {project.description ? (
                             <span className="truncate max-w-xs">{project.description}</span>
                           ) : (
-                            <span className="italic text-gray-400">No description</span>
+                            <span className="italic text-text-secondary">No description</span>
                           )}
                         </p>
                       </div>
-                      <div className="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
+                      <div className="mt-2 flex items-center text-sm text-text-secondary sm:mt-0">
                         <p>
                           {new Date(project.startDate || '').toLocaleDateString()} &mdash; {new Date(project.endDate || '').toLocaleDateString()}
                         </p>
@@ -198,13 +198,13 @@ function ProjectsListContent() {
                   <div className="ml-5 flex-shrink-0 flex space-x-2">
                     <Link
                       href={`/projects/${project.id}`}
-                      className="text-sm text-indigo-600 hover:text-indigo-900 font-medium"
+                      className="text-sm text-primary hover:text-primary font-medium"
                     >
                       View
                     </Link>
                     <Link
                       href={`/projects/${project.id}/edit`}
-                      className="text-sm text-gray-600 hover:text-gray-900 font-medium"
+                      className="text-sm text-text-secondary hover:text-text font-medium"
                     >
                       Edit
                     </Link>
@@ -225,19 +225,19 @@ export default function ProjectsPage() {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-gray-900">Projects</h1>
-            <p className="mt-1 text-sm text-gray-500">Manage your projects, track progress, and keep work organized.</p>
+            <h1 className="text-3xl font-bold text-text">Projects</h1>
+            <p className="mt-1 text-sm text-text-secondary">Manage your projects, track progress, and keep work organized.</p>
           </div>
           <div className="mt-4 sm:mt-0">
             <Link
               href="/projects/new"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700"
+              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:opacity-90"
             >
               Create Project
             </Link>
           </div>
         </div>
-        <Suspense fallback={<div className="p-8 text-center text-gray-500 animate-pulse">Loading list...</div>}>
+        <Suspense fallback={<div className="p-8 text-center text-text-secondary animate-pulse">Loading list...</div>}>
           <ProjectsListContent />
         </Suspense>
       </div>

@@ -2,12 +2,12 @@ import React from 'react';
 import { ProjectStatus } from '@/types';
 
 export const ProjectStatusBadge = ({ status }: { status: ProjectStatus }) => {
-  let styles = 'bg-gray-100 text-gray-800';
+  let styles = 'bg-gray-100 text-text';
   let label = 'Unknown';
 
   switch (status) {
     case 'NOT_STARTED':
-      styles = 'bg-gray-100 text-gray-800 border border-gray-200';
+      styles = 'bg-gray-100 text-text border border-border';
       label = 'Not Started';
       break;
     case 'IN_PROGRESS':
@@ -15,7 +15,7 @@ export const ProjectStatusBadge = ({ status }: { status: ProjectStatus }) => {
       label = 'In Progress';
       break;
     case 'COMPLETED':
-      styles = 'bg-green-100 text-green-800 border border-green-200';
+      styles = 'bg-success/20 text-success border border-green-200';
       label = 'Completed';
       break;
   }

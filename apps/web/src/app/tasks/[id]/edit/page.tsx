@@ -43,7 +43,7 @@ export default function EditTaskPage({ params }: { params: { id: string } }) {
   if (isLoading) {
     return (
       <AppShell>
-        <div className="max-w-3xl mx-auto p-8 text-center text-gray-500 animate-pulse">Loading task...</div>
+        <div className="max-w-3xl mx-auto p-8 text-center text-text-secondary animate-pulse">Loading task...</div>
       </AppShell>
     );
   }
@@ -61,7 +61,7 @@ export default function EditTaskPage({ params }: { params: { id: string } }) {
   return (
     <AppShell>
       <div className="max-w-3xl mx-auto">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">Edit Task</h1>
+        <h1 className="text-3xl font-bold text-text mb-8">Edit Task</h1>
         <TaskForm
           initialData={task}
           onSubmit={handleSubmit}
