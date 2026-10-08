@@ -1,169 +1,118 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Link from 'next/link';
 import { AppShell } from '@/components/layout/AppShell';
 import { getDashboardMetrics, DashboardMetrics } from '@/lib/api/dashboard';
+import { getProjects } from '@/lib/api/projects';
+import { getTasks } from '@/lib/api/tasks';
 import { useAuth } from '@/components/auth/AuthProvider';
+import type { Project, Task } from '@/types';
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
+const statusText = (status: string) => status.replace(/_/g, ' ').toLowerCase().replace(/\b\w/g, c => c.toUpperCase());
+const dateLabel = (date: string | null) => date ? new Date(date).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'No due date';
 
 export default function DashboardPage() {
   const { user } = useAuth();
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [projects, setProjects] = useState<Project[]>([]);
+  const [tasks, setTasks] = useState<Task[]>([]);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchMetrics = async () => {
-    setIsLoading(true);
+  const load = useCallback(async () => {
+    setLoading(true);
     setError('');
     try {
-      const res = await getDashboardMetrics();
-      if (res.data) setMetrics(res.data);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load dashboard metrics.');
+      const [m, p, t] = await Promise.all([getDashboardMetrics(), getProjects(), getTasks()]);
+      if (!m.data) throw new Error('Dashboard data was unavailable.');
+      setMetrics(m.data);
+      setProjects(p.data?.projects ?? []);
+      setTasks(t.data?.tasks ?? []);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : 'Unable to load your workspace.');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
-  };
-
-  useEffect(() => {
-    fetchMetrics();
   }, []);
 
-  const renderMetricCard = (label: string, value: number, bgColor: string) => (
-    <div className="nex-glass rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
-      <h3 className="text-sm font-medium text-text-secondary mb-1">{label}</h3>
-      <div className="mt-2 flex items-baseline gap-2">
-        <span className={`text-4xl font-bold tracking-tight text-text`}>{value}</span>
-      </div>
-      <div className={`mt-4 h-1 w-full rounded-full ${bgColor}`}></div>
-    </div>
-  );
+  useEffect(() => { void load(); }, [load]);
+
+  const completion = metrics?.totalTasks ? Math.round(metrics.completedTasks / metrics.totalTasks * 100) : 0;
+  const openTasks = tasks.filter(t => t.status !== 'COMPLETED').sort((a,b) =>
+    (a.dueDate ? new Date(a.dueDate).getTime() : Infinity) - (b.dueDate ? new Date(b.dueDate).getTime() : Infinity));
+  const activeProjects = projects.filter(p => p.status !== 'COMPLETED');
+  const stats = metrics ? [
+    { label: 'Total projects', value: metrics.totalProjects, accent: 'bg-violet-400' },
+    { label: 'In progress', value: metrics.projectsInProgress, accent: 'bg-sky-400' },
+    { label: 'Open tasks', value: metrics.pendingTasks, accent: 'bg-amber-400' },
+    { label: 'Completed tasks', value: metrics.completedTasks, accent: 'bg-emerald-400' },
+  ] : [];
 
   return (
     <AppShell>
-      <div className="max-w-7xl mx-auto space-y-8">
-        <div>
-          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text">Welcome back, <span className="nex-gradient-text">{user?.fullName?.split(' ')[0] || 'User'}</span></h1>
-          <p className="mt-1 text-sm text-text-secondary">Overview of your workspace, tasks, and project progress.</p>
+      <div className="mx-auto max-w-[1500px] space-y-5 pb-8">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[.24em] text-primary">Workspace / Overview</p>
+            <h1 className="text-2xl font-bold tracking-tight text-text sm:text-3xl">Good to see you, <span className="nex-gradient-text">{user?.fullName?.split(' ')[0] || 'there'}</span></h1>
+            <p className="mt-2 text-sm text-text-secondary">Everything you need to move your work forward.</p>
+          </div>
+          <div className="flex gap-2">
+            <Link href="/tasks/new" className="rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-text transition hover:bg-primary/10">+ New task</Link>
+            <Link href="/projects/new" className="nex-gradient rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-lg shadow-violet-500/10 transition hover:opacity-90">+ New project</Link>
+          </div>
         </div>
 
-        {isLoading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="nex-glass rounded-2xl p-6 h-32">
-                <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
-                <div className="h-10 bg-gray-200 rounded w-1/4"></div>
-              </div>
-            ))}
+        {loading ? <div className="nex-glass animate-pulse rounded-2xl p-10 text-text-secondary">Loading your workspace…</div> :
+        error ? <div role="alert" className="nex-glass rounded-2xl p-6"><h2 className="font-semibold text-text">Unable to load dashboard</h2><p className="mt-2 text-sm text-text-secondary">{error}</p><button onClick={() => void load()} className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white">Try again</button></div> :
+        metrics && <>
+          <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {stats.map(s => <div key={s.label} className="nex-glass rounded-2xl p-4 sm:p-5">
+              <div className="flex items-center gap-2 text-xs font-medium text-text-secondary"><span className={`h-2 w-2 rounded-full ${s.accent}`} />{s.label}</div>
+              <div className="mt-3 text-3xl font-bold tracking-tight text-text">{s.value}</div>
+            </div>)}
           </div>
-        ) : error ? (
-          <div className="bg-red-50 border border-red-100 p-6 rounded-xl text-center">
-            <h3 className="text-lg font-medium text-red-800 mb-2">Error Loading Dashboard</h3>
-            <p className="text-red-600 mb-4">{error}</p>
-            <button
-              onClick={fetchMetrics}
-              className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700"
-            >
-              Retry
-            </button>
+
+          <div className="grid grid-cols-1 gap-4 xl:grid-cols-12">
+            <section className="nex-glass rounded-2xl p-5 xl:col-span-8">
+              <div className="mb-5 flex items-center justify-between">
+                <div><h2 className="font-semibold text-text">Project workspace</h2><p className="mt-1 text-xs text-text-secondary">Your active projects and their current status</p></div>
+                <Link href="/projects" className="text-xs font-semibold text-primary hover:underline">All projects →</Link>
+              </div>
+              {activeProjects.length ? <div className="space-y-3">
+                {activeProjects.slice(0,6).map((p,i) => <Link key={p.id} href={`/projects/${p.id}`} className="group flex items-center gap-4 rounded-xl border border-border bg-background/40 p-3 transition hover:border-primary/50">
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white ${['bg-violet-500','bg-sky-500','bg-indigo-500','bg-teal-500'][i%4]}`}>{p.name.charAt(0).toUpperCase()}</div>
+                  <div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-text group-hover:text-primary">{p.name}</p><p className="mt-1 truncate text-xs text-text-secondary">{p.description || 'No description yet'}</p></div>
+                  <div className="hidden text-right sm:block"><span className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary">{statusText(p.status)}</span><p className="mt-2 text-[11px] text-text-secondary">{p.endDate ? `Due ${dateLabel(p.endDate)}` : 'No deadline'}</p></div>
+                  <span className="text-text-secondary">→</span>
+                </Link>)}
+              </div> : <div className="rounded-xl border border-dashed border-border p-8 text-center"><p className="text-sm text-text-secondary">No active projects yet.</p><Link href="/projects/new" className="mt-3 inline-block text-sm font-semibold text-primary">Create your first project →</Link></div>}
+            </section>
+
+            <section className="nex-glass rounded-2xl p-5 xl:col-span-4">
+              <div className="mb-6"><h2 className="font-semibold text-text">Task progress</h2><p className="mt-1 text-xs text-text-secondary">Your overall completion rate</p></div>
+              <div className="mx-auto flex h-44 w-44 items-center justify-center rounded-full p-4" style={{background:`conic-gradient(var(--primary) ${completion}%, var(--border) ${completion}% 100%)`}}>
+                <div className="flex h-full w-full flex-col items-center justify-center rounded-full bg-background"><span className="text-4xl font-bold text-text">{completion}%</span><span className="mt-1 text-xs text-text-secondary">completed</span></div>
+              </div>
+              <div className="mt-6 flex justify-between border-t border-border pt-4 text-sm"><span className="text-text-secondary">Total tasks</span><strong className="text-text">{metrics.totalTasks}</strong></div>
+              <div className="mt-3 flex justify-between text-sm"><span className="text-text-secondary">Completed</span><strong className="text-text">{metrics.completedTasks}</strong></div>
+              <div className="mt-3 flex justify-between text-sm"><span className="text-text-secondary">Pending</span><strong className="text-text">{metrics.pendingTasks}</strong></div>
+            </section>
+
+            <section className="nex-glass rounded-2xl p-5 xl:col-span-8">
+              <div className="mb-4 flex items-center justify-between"><div><h2 className="font-semibold text-text">Upcoming tasks</h2><p className="mt-1 text-xs text-text-secondary">Stay focused on what needs attention</p></div><Link href="/tasks" className="text-xs font-semibold text-primary hover:underline">View tasks →</Link></div>
+              {openTasks.length ? <div className="divide-y divide-border">{openTasks.slice(0,6).map(t => <Link href={`/tasks/${t.id}`} key={t.id} className="flex items-center gap-3 py-3 hover:text-primary"><span className="h-4 w-4 shrink-0 rounded border-2 border-primary/50"/><span className="min-w-0 flex-1 truncate text-sm font-medium text-text">{t.name}</span><span className={`hidden rounded-md px-2 py-1 text-[11px] font-medium sm:block ${t.priority === 'HIGH' ? 'bg-rose-500/10 text-rose-400' : 'bg-primary/10 text-primary'}`}>{statusText(t.priority)}</span><span className="whitespace-nowrap text-xs text-text-secondary">{dateLabel(t.dueDate)}</span></Link>)}</div> : <div className="rounded-xl border border-dashed border-border p-8 text-center text-sm text-text-secondary">No open tasks. <Link href="/tasks/new" className="font-semibold text-primary">Add a task →</Link></div>}
+            </section>
+
+            <section className="nex-glass rounded-2xl p-5 xl:col-span-4">
+              <h2 className="font-semibold text-text">Quick access</h2><p className="mt-1 text-xs text-text-secondary">Jump back into your workflow</p>
+              <div className="mt-5 space-y-2">
+                {[{label:'Manage projects',href:'/projects',icon:'▦'},{label:'Task board',href:'/tasks',icon:'☑'},{label:'My account',href:'/account',icon:'◉'}].map(item => <Link key={item.href} href={item.href} className="flex items-center gap-3 rounded-xl border border-border bg-background/30 px-4 py-3 text-sm font-medium text-text transition hover:border-primary/50 hover:bg-primary/10"><span className="text-lg text-primary">{item.icon}</span><span className="flex-1">{item.label}</span><span className="text-text-secondary">↗</span></Link>)}
+              </div>
+            </section>
           </div>
-        ) : metrics ? (
-          <>
-            {/* Metric Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {renderMetricCard('Total Projects', metrics.totalProjects, 'bg-primary')}
-              {renderMetricCard('Projects In Progress', metrics.projectsInProgress, 'bg-blue-600')}
-              {renderMetricCard('Total Tasks', metrics.totalTasks, 'bg-gray-600')}
-              {renderMetricCard('Pending Tasks', metrics.pendingTasks, 'bg-yellow-600')}
-              {renderMetricCard('Completed Tasks', metrics.completedTasks, 'bg-green-600')}
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              {/* Task Progress Summary */}
-              <div className="nex-glass rounded-2xl p-6">
-                <h2 className="text-lg font-bold text-text mb-4">Task Completion</h2>
-                {metrics.totalTasks === 0 ? (
-                  <div className="text-center py-6">
-                    <p className="text-text-secondary mb-4">No tasks tracked yet.</p>
-                    <Link href="/tasks/new" className="text-primary font-medium hover:text-primary">
-                      Create your first task
-                    </Link>
-                  </div>
-                ) : (
-                  <div>
-                    <div className="flex justify-between items-end mb-2">
-                      <span className="text-sm font-medium text-text">Progress</span>
-                      <span className="text-2xl font-bold text-green-600">
-                        {Math.round((metrics.completedTasks / metrics.totalTasks) * 100)}%
-                      </span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-4 mb-4">
-                      <div
-                        className="bg-green-500 h-4 rounded-full transition-all duration-500"
-                        style={{ width: `${Math.round((metrics.completedTasks / metrics.totalTasks) * 100)}%` }}
-                      ></div>
-                    </div>
-                    <div className="flex justify-between text-sm text-text-secondary">
-                      <span>{metrics.completedTasks} Completed</span>
-                      <span>{metrics.pendingTasks} Pending</span>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Quick Actions */}
-              <div className="nex-glass rounded-2xl p-6">
-                <h2 className="text-lg font-bold text-text mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <Link
-                    href="/projects/new"
-                    className="flex flex-col justify-center items-center p-4 border border-border rounded-lg hover:bg-primary/10 hover:border-primary/20 transition-colors group text-center"
-                  >
-                    <span className="text-xl mb-1 group-hover:scale-110 transition-transform">📂</span>
-                    <span className="text-sm font-medium text-text group-hover:text-primary">Create Project</span>
-                  </Link>
-                  <Link
-                    href="/tasks/new"
-                    className="flex flex-col justify-center items-center p-4 border border-border rounded-lg hover:bg-primary/10 hover:border-primary/20 transition-colors group text-center"
-                  >
-                    <span className="text-xl mb-1 group-hover:scale-110 transition-transform">✅</span>
-                    <span className="text-sm font-medium text-text group-hover:text-primary">Create Task</span>
-                  </Link>
-                  <Link
-                    href="/projects"
-                    className="flex flex-col justify-center items-center p-4 border border-border rounded-lg hover:bg-background transition-colors group text-center"
-                  >
-                    <span className="text-sm font-medium text-text-secondary group-hover:text-text">View All Projects</span>
-                  </Link>
-                  <Link
-                    href="/tasks"
-                    className="flex flex-col justify-center items-center p-4 border border-border rounded-lg hover:bg-background transition-colors group text-center"
-                  >
-                    <span className="text-sm font-medium text-text-secondary group-hover:text-text">View All Tasks</span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            {/* Empty States / Starter Call to Action */}
-            {metrics.totalProjects === 0 && metrics.totalTasks === 0 && (
-              <div className="mt-8 nex-glass rounded-xl p-8 text-center">
-                <h2 className="text-xl font-bold text-text mb-2">Welcome to NEXVYRA!</h2>
-                <p className="text-text-secondary mb-6 max-w-lg mx-auto">
-                  Your workspace is currently empty. Get started by creating your first project and adding tasks to track your work.
-                </p>
-                <Link
-                  href="/projects/new"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white nex-gradient hover:opacity-90"
-                >
-                  Create First Project
-                </Link>
-              </div>
-            )}
-          </>
-        ) : null}
+        </>}
       </div>
     </AppShell>
   );
