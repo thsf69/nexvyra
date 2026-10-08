@@ -1,6 +1,7 @@
 import { useTheme } from '../../context/ThemeContext';
 import { ThemeTokens } from '../../theme/tokens';
 import React, { useMemo } from 'react';
+import { Feather } from '@expo/vector-icons';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Project } from '../../types';
 import { ProjectStatusBadge } from './ProjectStatusBadge';
@@ -26,8 +27,9 @@ export const ProjectCard = ({ project, onPress }: Props) => {
       accessibilityRole="button"
       accessibilityLabel={`View project: ${project.name}`}
     >
+      <View style={styles.cardAccent} />
       <View style={styles.header}>
-        <Text style={styles.title} numberOfLines={1}>
+        <Text style={styles.title} numberOfLines={2}>
           {project.name}
         </Text>
         <ProjectStatusBadge status={project.status} />
@@ -58,16 +60,17 @@ export const ProjectCard = ({ project, onPress }: Props) => {
 };
 
 const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create({
+  cardAccent: { width: 36, height: 4, borderRadius: 4, backgroundColor: tokens.primary, marginBottom: 14 },
   card: {
     backgroundColor: tokens.surface,
     borderRadius: 18,
-    padding: 19,
+    padding: 17,
     marginBottom: 12,
     borderWidth: 1,
     borderColor: tokens.border,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
+    shadowOpacity: 0.07,
     shadowRadius: 2,
     elevation: 2,
   },
@@ -79,7 +82,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   },
   title: {
     flex: 1,
-    fontSize: 18,
+    fontSize: 16,
     fontWeight: '600',
     color: tokens.text,
     marginRight: 12,
@@ -92,7 +95,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   },
   emptyDescription: {
     fontStyle: 'italic',
-    color: '#8593AF',
+    color: tokens.textSecondary,
   },
   footer: {
     flexDirection: 'row',
@@ -105,13 +108,13 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   },
   dateLabel: {
     fontSize: 12,
-    color: '#9BAAC5',
+    color: tokens.textSecondary,
     fontWeight: '500',
     marginBottom: 2,
   },
   dateValue: {
     fontSize: 13,
-    color: '#263E59',
+    color: tokens.text,
     fontWeight: '500',
   },
 });
