@@ -23,11 +23,6 @@ app.use(cors({
     if (envOrigins.includes(origin)) {
       return callback(null, true);
     }
-
-    // Allow dynamic Vercel preview deployments for NEXVYRA
-    if (origin.match(/^https:\/\/nexvyra[a-zA-Z0-9-]*\.vercel\.app$/)) {
-      return callback(null, true);
-    }
     
     callback(new Error('Not allowed by CORS'));
   }

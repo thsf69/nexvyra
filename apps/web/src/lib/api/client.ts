@@ -39,16 +39,19 @@ const handleResponse = async (response: Response) => {
 
   if (!response.ok) {
     if (response.status === 401) {
-      // 401 handling is primarily managed by the AuthProvider, 
-      // but we throw so the caller knows it failed.
       clearAuthToken();
-      // Dispatch a custom event so the UI can redirect if needed globally, 
-      // or just let AuthProvider catch it via error boundary / context refresh.
       if (typeof window !== 'undefined') {
         window.dispatchEvent(new Event('auth:unauthorized'));
       }
     }
-    const message = data?.message || 'Unable to connect to NEXVYRA. Please check your connection and try again.';
+    
+    let message = 'Unable to connect to NEXVYRA. Please check your connection and try again.';
+    if (data?.message) {
+      message = data.message;
+    } else if (!isJson) {
+      // Sometimes rate limiters or proxies send plain text
+      message = await response.text();
+    }
     throw new ApiClientError(response.status, message, data);
   }
 
@@ -73,12 +76,12 @@ const request = async <T>(endpoint: string, options: RequestInit = {}): Promise<
       headers,
     });
     return await handleResponse(response);
-  } catch (error) {
+  } catch (error: any) {
     if (error instanceof ApiClientError) {
       throw error;
     }
-    // Network error
-    throw new ApiClientError(0, 'Unable to connect to NEXVYRA. Please check your connection and try again.');
+    // Real network error (CORS or offline)
+    throw new ApiClientError(0, error?.message || 'Unable to connect to NEXVYRA. Please check your connection and try again.');
   }
 };
 
