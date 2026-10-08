@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, StyleSheet, ScrollView, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -16,6 +17,7 @@ type TaskCreateScreenRouteProp = RouteProp<AppStackParamList, 'TaskCreate'>;
 type TaskCreateScreenNavigationProp = NativeStackNavigationProp<AppStackParamList, 'Tasks'>;
 
 export const TaskCreateScreen = () => {
+  const insets = useSafeAreaInsets();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<TaskCreateScreenNavigationProp>();
   const route = useRoute<TaskCreateScreenRouteProp>();
