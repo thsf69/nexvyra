@@ -35,3 +35,10 @@ body {
     text-wrap: balance;
   }
 }
+
+/* Futuristic glassmorphism design foundation */
+:root { --glass-glow: rgba(108, 92, 231, .12); }
+[data-theme='dark'] { --glass-glow: rgba(139, 92, 246, .22); }
+.nex-glass { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 12px 40px var(--glass-glow); }
+.nex-gradient { background: linear-gradient(120deg,#7457ef,#468cff 65%,#26c9d2); }
+.nex-gradient-text { background: linear-gradient(105deg,#9573fa,#51b7fc); -webkit-background-clip:text; background-clip:text; color:transparent; }
