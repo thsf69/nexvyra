@@ -55,12 +55,12 @@ export const ProjectCard = ({ project, onPress }: Props) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderRadius: 18,
     padding: 19,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#2C3852',
+    borderColor: '#DCE5F0',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -77,12 +77,12 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: '600',
-    color: '#F7F8FF',
+    color: '#162B46',
     marginRight: 12,
   },
   description: {
     fontSize: 14,
-    color: '#A6B3CC',
+    color: '#637991',
     marginBottom: 16,
     lineHeight: 20,
   },
@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     borderTopWidth: 1,
-    borderTopColor: '#2C3852',
+    borderTopColor: '#DCE5F0',
     paddingTop: 12,
   },
   dateBlock: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
   },
   dateValue: {
     fontSize: 13,
-    color: '#DCE4F6',
+    color: '#263E59',
     fontWeight: '500',
   },
 });
