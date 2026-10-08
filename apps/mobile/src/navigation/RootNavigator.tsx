@@ -28,7 +28,7 @@ const AuthNavigator = () => (
 );
 
 const AppNavigator = () => (
-  <AppStack.Navigator>
+  <AppStack.Navigator screenOptions={{ headerStyle: { backgroundColor: '#141E32' }, headerTintColor: '#F7F8FF', headerTitleStyle: { fontWeight: '700' }, contentStyle: { backgroundColor: '#0B1020' } }}>
     <AppStack.Screen name="Dashboard" component={DashboardScreen} />
     <AppStack.Screen name="Projects" component={ProjectsScreen} />
     <AppStack.Screen name="ProjectDetail" component={ProjectDetailScreen} options={{ title: 'Project Details' }} />
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   loadingText: {
     marginTop: 16,
     fontSize: 16,
-    color: '#6b7280',
+    color: '#A6B3CC',
   },
 });
