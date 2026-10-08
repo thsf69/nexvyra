@@ -130,19 +130,17 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
           <Link href="/account" aria-current={pathname.startsWith("/account") ? "page" : undefined} className={`flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-colors ${pathname.startsWith("/account") ? "bg-primary/10 text-primary ring-1 ring-primary/20" : "text-text-secondary hover:bg-primary/5 hover:text-text"}`}><span className="flex h-9 w-9 items-center justify-center rounded-lg bg-background/50"><NavIcon name="Account" /></span>Account</Link>
         </nav>
 
-        <div className="p-4 border-t border-border">
-          <div className="flex flex-col space-y-4">
-            <div>
-              <p className="text-sm font-medium text-text truncate">{user.fullName}</p>
-              <p className="text-xs text-text-secondary truncate">{user.email}</p></div>
+        <div className="p-4 border-t border-border bg-background/20">
+          <div className="flex items-center gap-3 rounded-xl p-2">
+            <Avatar name={user.fullName} />
+            <div className="min-w-0 flex-1">
+              <p className="truncate text-sm font-semibold text-text">{user.fullName}</p>
+              <p className="truncate text-xs text-text-secondary">{user.email}</p>
             </div>
-            <button
-              onClick={logout}
-              className="w-full text-left px-3 py-2 rounded-lg text-sm font-medium text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-            >
-              Log out
-            </button>
           </div>
+          <button onClick={logout} className="mt-3 w-full rounded-xl border border-border px-3 py-2.5 text-left text-sm font-medium text-text-secondary transition-colors hover:border-red-500/30 hover:bg-red-500/5 hover:text-red-500">
+            Log out
+          </button>
         </div>
       </aside>
 
