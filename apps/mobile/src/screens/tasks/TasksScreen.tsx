@@ -1,3 +1,5 @@
+import { useTheme } from '../../context/ThemeContext';
+import { ThemeTokens } from '../../theme/tokens';
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   View,
@@ -44,6 +46,8 @@ const PRIORITY_FILTERS = [
 ];
 
 export const TasksScreen = () => {
+  const { tokens, isDark } = useTheme();
+  const styles = useMemo(() => createStyles(tokens, isDark), [tokens, isDark]);
   const navigation = useNavigation<TasksScreenNavigationProp>();
   const route = useRoute<TasksScreenRouteProp>();
   const initialProjectId = route.params?.projectId || '';
@@ -276,7 +280,7 @@ export const TasksScreen = () => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmptyComponent}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#1769B1']} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[tokens.primary]} />
           }
         />
       )}
@@ -293,13 +297,13 @@ export const TasksScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F4F7FB' },
+const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create({
+  container: { flex: 1, backgroundColor: tokens.background },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: tokens.surface,
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: tokens.border,
   },
   searchContainer: {
     flexDirection: 'row',
@@ -313,7 +317,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#162B46',
+    color: tokens.text,
   },
   clearButton: { padding: 4 },
   clearButtonText: { color: '#6b7280', fontSize: 16, fontWeight: 'bold' },
@@ -349,29 +353,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#f3f4f6',
     marginRight: 8,
   },
-  filterPillActive: { backgroundColor: '#e0e7ff' },
+  filterPillActive: { backgroundColor: (isDark ? '#284563' : (isDark ? '#284563' : '#E8F2FC')) },
   filterText: { fontSize: 13, color: '#4b5563', fontWeight: '500' },
-  filterTextActive: { color: '#1769B1' },
+  filterTextActive: { color: tokens.primary },
   listContent: { padding: 16, flexGrow: 1 },
   centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
   emptyText: { fontSize: 16, color: '#6b7280', textAlign: 'center' },
-  errorText: { fontSize: 16, color: '#dc2626', textAlign: 'center', marginBottom: 16 },
+  errorText: { fontSize: 16, color: (isDark ? '#FDA4AF' : '#DC2626'), textAlign: 'center', marginBottom: 16 },
   retryButton: { paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#f3f4f6', borderRadius: 6 },
   retryText: { fontSize: 14, color: '#4b5563', fontWeight: '500' },
   fab: {
     position: 'absolute', right: 20, bottom: Platform.OS === 'ios' ? 40 : 20,
-    backgroundColor: '#1769B1', width: 56, height: 56, borderRadius: 28,
+    backgroundColor: tokens.primary, width: 56, height: 56, borderRadius: 28,
     justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 4,
   },
-  fabText: { fontSize: 28, color: '#fff', lineHeight: 32 },
+  fabText: { fontSize: 28, color: tokens.surface, lineHeight: 32 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
-  modalContent: { backgroundColor: '#FFFFFF', borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
-  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: '#162B46' },
+  modalContent: { backgroundColor: tokens.surface, borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
+  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: tokens.text },
   modalItem: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
-  modalItemActive: { backgroundColor: '#F4F7FB' },
+  modalItemActive: { backgroundColor: tokens.background },
   modalItemText: { fontSize: 16, color: '#374151' },
-  modalItemTextActive: { color: '#1769B1', fontWeight: '600' },
+  modalItemTextActive: { color: tokens.primary, fontWeight: '600' },
   modalCloseButton: { marginTop: 16, paddingVertical: 14, alignItems: 'center', backgroundColor: '#f3f4f6', borderRadius: 8 },
   modalCloseText: { fontSize: 16, fontWeight: '600', color: '#374151' },
 });
