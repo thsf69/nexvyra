@@ -76,6 +76,7 @@ export const ProjectForm = ({ initialData, onSubmit, isSubmitting, submitLabel }
         <h2 className="mt-2 text-xl font-semibold tracking-tight text-text">Set up your project</h2>
         <p className="mt-1 text-sm text-text-secondary">Add the essentials, then set a timeline and status.</p>
       </div>
+      <div className="border-b border-border/70 pb-6"><p className="text-[11px] font-bold uppercase tracking-[.2em] text-primary">Workspace / {initialData ? "Edit" : "Create"}</p><h2 className="mt-2 text-xl font-bold tracking-tight text-text">{initialData ? "Update" : "New"} project</h2><p className="mt-1 text-sm text-text-secondary">Fill in the details below to organize your project and timeline.</p></div>
       {error && (
         <div role="alert" className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-600 dark:text-red-300">
           {error}
