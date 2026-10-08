@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-  --background: #F5F8FC;
+  --background: #F4F7FB;
   --surface: #FFFFFF;
-  --primary: #167CBA;
-  --text: #14283F;
-  --text-secondary: #59738A;
-  --success: #14B8A6;
-  --iris: #6474D9;
-  --border: #E2E8F0;
+  --primary: #1769B1;
+  --text: #162B46;
+  --text-secondary: #637991;
+  --success: #13877E;
+  --iris: #2C7DC3;
+  --border: #DCE5F0;
 }
 
 [data-theme='dark'] {
@@ -40,5 +40,5 @@ body {
 :root { --glass-glow: rgba(108, 92, 231, .12); }
 [data-theme='dark'] { --glass-glow: rgba(139, 92, 246, .22); }
 .nex-glass { background: var(--surface); border: 1px solid var(--border); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); box-shadow: 0 12px 40px var(--glass-glow); }
-.nex-gradient { background: linear-gradient(120deg,#7457ef,#468cff 65%,#26c9d2); }
-.nex-gradient-text { background: linear-gradient(105deg,#9573fa,#51b7fc); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.nex-gradient { background: linear-gradient(120deg,#1769B1,#2586CB); }
+.nex-gradient-text { color: var(--primary); }
