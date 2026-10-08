@@ -227,6 +227,8 @@ export const TasksScreen = () => {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
+            style={styles.filterList}
+            contentContainerStyle={styles.filterListContent}
             data={STATUS_FILTERS}
             keyExtractor={(f) => f.value}
             renderItem={({ item }) => (
@@ -247,6 +249,8 @@ export const TasksScreen = () => {
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
+            style={styles.filterList}
+            contentContainerStyle={styles.filterListContent}
             data={PRIORITY_FILTERS}
             keyExtractor={(f) => f.value}
             renderItem={({ item }) => (
@@ -261,6 +265,7 @@ export const TasksScreen = () => {
             )}
           />
         </View>
+        <Text style={styles.filterHint}>Swipe filters left to see more  →</Text>
       </View>
 
       {loading && !refreshing ? (
@@ -339,8 +344,11 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   filterSection: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 8,
+    marginBottom: 10,
   },
+  filterList: { flex: 1, minWidth: 0 },
+  filterListContent: { alignItems: 'center', paddingRight: 12 },
+  filterHint: { color: tokens.textSecondary, fontSize: 11, textAlign: 'right', marginTop: 1 },
   filterLabel: {
     fontSize: 13,
     fontWeight: '500',
