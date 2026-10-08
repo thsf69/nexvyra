@@ -98,7 +98,7 @@ export const TaskForm = ({ initialData, defaultProjectId, onSubmit, isSubmitting
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Select Project</Text>
           {loadingProjects ? (
-            <ActivityIndicator style={{ margin: 20 }} color="#7254D7" />
+            <ActivityIndicator style={{ margin: 20 }} color="#1769B1" />
           ) : (
             <FlatList
               data={projects}
@@ -248,7 +248,7 @@ export const TaskForm = ({ initialData, defaultProjectId, onSubmit, isSubmitting
         disabled={isSubmitting}
       >
         {isSubmitting ? (
-          <ActivityIndicator color="#19243B" />
+          <ActivityIndicator color="#FFFFFF" />
         ) : (
           <Text style={styles.submitButtonText}>{submitLabel}</Text>
         )}
@@ -279,18 +279,18 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#DCE4F6',
+    color: '#263E59',
     marginBottom: 6,
   },
   input: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 10,
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   textArea: {
     minHeight: 100,
@@ -304,9 +304,9 @@ const styles = StyleSheet.create({
     gap: 8, 
   },
   chipButton: {
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderWidth: 1,
-    borderColor: '#2C3852',
+    borderColor: '#DCE5F0',
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 6,
@@ -315,19 +315,19 @@ const styles = StyleSheet.create({
   },
   chipButtonActive: {
     backgroundColor: '#e0e7ff',
-    borderColor: '#7254D7',
+    borderColor: '#1769B1',
   },
   chipText: {
-    color: '#A6B3CC',
+    color: '#637991',
     fontSize: 13,
     fontWeight: '500',
     textTransform: 'capitalize',
   },
   chipTextActive: {
-    color: '#7254D7',
+    color: '#1769B1',
   },
   selectButton: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
@@ -336,10 +336,10 @@ const styles = StyleSheet.create({
   },
   selectButtonText: {
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   dateButton: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderColor: '#d1d5db',
     borderWidth: 1,
     borderRadius: 8,
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
   },
   dateButtonText: {
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   clearDateText: {
     color: '#ef4444',
@@ -357,7 +357,7 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
   submitButton: {
-    backgroundColor: '#7254D7',
+    backgroundColor: '#1769B1',
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
@@ -368,7 +368,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   submitButtonText: {
-    color: '#19243B',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -378,7 +378,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   modalContent: {
-    backgroundColor: '#19243B',
+    backgroundColor: '#FFFFFF',
     borderTopLeftRadius: 16,
     borderTopRightRadius: 16,
     padding: 20,
@@ -388,38 +388,38 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: '600',
     marginBottom: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   modalItem: {
     paddingVertical: 14,
     borderBottomWidth: 1,
-    borderBottomColor: '#26314A',
+    borderBottomColor: '#EDF3FA',
   },
   modalItemActive: {
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   modalItemText: {
     fontSize: 16,
-    color: '#DCE4F6',
+    color: '#263E59',
   },
   modalItemTextActive: {
-    color: '#7254D7',
+    color: '#1769B1',
     fontWeight: '600',
   },
   modalCloseButton: {
     marginTop: 16,
     paddingVertical: 14,
     alignItems: 'center',
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderRadius: 8,
   },
   modalCloseText: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#DCE4F6',
+    color: '#263E59',
   },
   emptyProjectsText: {
-    color: '#A6B3CC',
+    color: '#637991',
     textAlign: 'center',
     marginVertical: 20,
   }
