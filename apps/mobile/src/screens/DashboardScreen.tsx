@@ -80,14 +80,14 @@ export const DashboardScreen = () => {
   };
 
   const renderContent = () => {
-    if (loading && !refreshing) return <View style={styles.centerContainer}><ActivityIndicator size="large" color="#9575FF" /></View>;
+    if (loading && !refreshing) return <View style={styles.centerContainer}><ActivityIndicator size="large" color="#2374C6" /></View>;
     if (error) return <View style={styles.centerContainer}><Text style={styles.errorText}>{error}</Text><TouchableOpacity style={styles.actionButton} onPress={() => fetchMetrics()}><Text style={styles.actionButtonText}>Try again</Text></TouchableOpacity></View>;
     if (!metrics) return null;
     const completion = metrics.totalTasks ? Math.round(metrics.completedTasks / metrics.totalTasks * 100) : 0;
     const activeProjects = projects.filter(p => p.status !== 'COMPLETED').slice(0, 6);
     const upcoming = tasks.filter(t => t.status !== 'COMPLETED').sort((a, b) => (a.dueDate ? new Date(a.dueDate).getTime() : Infinity) - (b.dueDate ? new Date(b.dueDate).getTime() : Infinity)).slice(0, 6);
     const stats = [
-      { label: 'Total projects', value: metrics.totalProjects, color: '#A78BFA' },
+      { label: 'Total projects', value: metrics.totalProjects, color: '#1769B1' },
       { label: 'In progress', value: metrics.projectsInProgress, color: '#38BDF8' },
       { label: 'Open tasks', value: metrics.pendingTasks, color: '#FBBF24' },
       { label: 'Completed tasks', value: metrics.completedTasks, color: '#34D399' },
@@ -118,7 +118,7 @@ export const DashboardScreen = () => {
     </View>;
   };
 
-  return <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#9575FF']} />}>
+  return <ScrollView style={styles.container} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#2374C6']} />}>
     <View style={styles.header}><Text style={styles.brandText}>NEXVYRA / WORKSPACE</Text><Text style={styles.greetingText}>Good to see you, <Text style={styles.highlight}>{user?.fullName?.split(' ')[0] || 'there'}</Text></Text><Text style={styles.headerSubtitle}>Everything you need to move your work forward.</Text></View>
     {renderContent()}
   </ScrollView>;
@@ -126,45 +126,45 @@ export const DashboardScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1020' },
+  container: { flex: 1, backgroundColor: '#F4F7FB' },
   header: { paddingHorizontal: 20, paddingTop: 28, paddingBottom: 24 },
-  brandText: { fontSize: 11, letterSpacing: 2, fontWeight: '800', color: '#A78BFA', marginBottom: 12 },
-  greetingText: { fontSize: 26, fontWeight: '800', color: '#F7F8FF', lineHeight: 34 },
-  highlight: { color: '#A78BFA' },
-  headerSubtitle: { fontSize: 13, color: '#A6B3CC', marginTop: 9 },
+  brandText: { fontSize: 11, letterSpacing: 2, fontWeight: '800', color: '#1769B1', marginBottom: 12 },
+  greetingText: { fontSize: 26, fontWeight: '800', color: '#162B46', lineHeight: 34 },
+  highlight: { color: '#1769B1' },
+  headerSubtitle: { fontSize: 13, color: '#637991', marginTop: 9 },
   content: { paddingHorizontal: 16, paddingBottom: 44 },
   centerContainer: { padding: 30, minHeight: 220, justifyContent: 'center', alignItems: 'center' },
   errorText: { color: '#FCA5A5', marginBottom: 14, textAlign: 'center' },
   actionsGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 20 },
-  actionButton: { width: '48%', minHeight: 48, backgroundColor: '#7254D7', borderRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8 },
-  actionButtonSecondary: { backgroundColor: '#19243B', borderWidth: 1, borderColor: '#34405B' },
+  actionButton: { width: '48%', minHeight: 48, backgroundColor: '#1769B1', borderRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8 },
+  actionButtonSecondary: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#CBD7E5' },
   actionButtonText: { color: '#FFFFFF', fontWeight: '700', fontSize: 13 },
-  actionButtonTextSecondary: { color: '#F7F8FF', fontWeight: '700', fontSize: 13 },
+  actionButtonTextSecondary: { color: '#162B46', fontWeight: '700', fontSize: 13 },
   metricsGrid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
-  metricCard: { width: '48%', backgroundColor: '#19243B', borderColor: '#2C3852', borderWidth: 1, borderRadius: 18, padding: 17, marginBottom: 13 },
+  metricCard: { width: '48%', backgroundColor: '#FFFFFF', borderColor: '#DCE5F0', borderWidth: 1, borderRadius: 18, padding: 17, marginBottom: 13 },
   metricHeading: { flexDirection: 'row', alignItems: 'center' },
   statDot: { width: 8, height: 8, borderRadius: 4, marginRight: 8 },
-  metricLabel: { color: '#A6B3CC', fontSize: 11, flexShrink: 1 },
-  metricValue: { color: '#F7F8FF', fontSize: 30, fontWeight: '800', marginTop: 13 },
-  sectionCard: { backgroundColor: '#19243B', borderWidth: 1, borderColor: '#2C3852', borderRadius: 20, padding: 18, marginBottom: 16 },
+  metricLabel: { color: '#637991', fontSize: 11, flexShrink: 1 },
+  metricValue: { color: '#162B46', fontSize: 30, fontWeight: '800', marginTop: 13 },
+  sectionCard: { backgroundColor: '#FFFFFF', borderWidth: 1, borderColor: '#DCE5F0', borderRadius: 20, padding: 18, marginBottom: 16 },
   sectionHeading: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12, gap: 6 },
-  sectionTitle: { color: '#F7F8FF', fontSize: 17, fontWeight: '800' },
-  sectionSubtitle: { color: '#A6B3CC', fontSize: 11, marginTop: 5, lineHeight: 17 },
-  sectionLink: { color: '#A78BFA', fontWeight: '700', fontSize: 11, paddingVertical: 3 },
-  listRow: { backgroundColor: '#111B2E', borderWidth: 1, borderColor: '#2C3852', borderRadius: 13, padding: 12, marginTop: 10, flexDirection: 'row', alignItems: 'center', gap: 10 },
+  sectionTitle: { color: '#162B46', fontSize: 17, fontWeight: '800' },
+  sectionSubtitle: { color: '#637991', fontSize: 11, marginTop: 5, lineHeight: 17 },
+  sectionLink: { color: '#1769B1', fontWeight: '700', fontSize: 11, paddingVertical: 3 },
+  listRow: { backgroundColor: '#111B2E', borderWidth: 1, borderColor: '#DCE5F0', borderRadius: 13, padding: 12, marginTop: 10, flexDirection: 'row', alignItems: 'center', gap: 10 },
   projectAvatar: { width: 40, height: 40, borderRadius: 11, justifyContent: 'center', alignItems: 'center' },
   projectAvatarText: { color: '#FFFFFF', fontWeight: '800', fontSize: 17 },
   rowBody: { flex: 1, minWidth: 0 },
-  rowTitle: { color: '#F7F8FF', fontWeight: '700', fontSize: 13 },
-  rowSubtitle: { color: '#A6B3CC', fontSize: 11, marginTop: 4 },
-  rowMeta: { color: '#A78BFA', fontSize: 10, marginTop: 5, textTransform: 'capitalize' },
-  rowArrow: { color: '#A6B3CC', fontSize: 22 },
-  emptyText: { color: '#A6B3CC', fontSize: 13, paddingVertical: 20, lineHeight: 20 },
-  progressCenter: { width: 150, height: 150, borderRadius: 75, borderWidth: 12, borderColor: '#7254D7', alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginVertical: 20, backgroundColor: '#111B2E' },
-  progressNumber: { color: '#F7F8FF', fontSize: 34, fontWeight: '800' },
-  progressBarBackground: { height: 7, backgroundColor: '#303B53', borderRadius: 5, overflow: 'hidden', marginBottom: 18 },
-  progressBarFill: { height: '100%', backgroundColor: '#9575FF', borderRadius: 5 },
-  progressSummary: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 9, borderTopWidth: 1, borderTopColor: '#2C3852' },
-  taskRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 13, borderTopWidth: 1, borderTopColor: '#2C3852', gap: 12 },
+  rowTitle: { color: '#162B46', fontWeight: '700', fontSize: 13 },
+  rowSubtitle: { color: '#637991', fontSize: 11, marginTop: 4 },
+  rowMeta: { color: '#1769B1', fontSize: 10, marginTop: 5, textTransform: 'capitalize' },
+  rowArrow: { color: '#637991', fontSize: 22 },
+  emptyText: { color: '#637991', fontSize: 13, paddingVertical: 20, lineHeight: 20 },
+  progressCenter: { width: 150, height: 150, borderRadius: 75, borderWidth: 12, borderColor: '#1769B1', alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginVertical: 20, backgroundColor: '#111B2E' },
+  progressNumber: { color: '#162B46', fontSize: 34, fontWeight: '800' },
+  progressBarBackground: { height: 7, backgroundColor: '#DCE5F0', borderRadius: 5, overflow: 'hidden', marginBottom: 18 },
+  progressBarFill: { height: '100%', backgroundColor: '#2374C6', borderRadius: 5 },
+  progressSummary: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 9, borderTopWidth: 1, borderTopColor: '#DCE5F0' },
+  taskRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 13, borderTopWidth: 1, borderTopColor: '#DCE5F0', gap: 12 },
   taskCheckbox: { width: 17, height: 17, borderWidth: 2, borderColor: '#8B6CF0', borderRadius: 5 },
 });
