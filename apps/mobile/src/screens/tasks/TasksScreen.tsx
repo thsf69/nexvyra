@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   View,
   Text,
@@ -101,7 +101,13 @@ export const TasksScreen = () => {
     }
   };
 
+  const skipInitialFilterFetch = useRef(true);
   useEffect(() => {
+    // Focus listener handles the initial request; avoid sending it twice.
+    if (skipInitialFilterFetch.current) {
+      skipInitialFilterFetch.current = false;
+      return;
+    }
     const delay = setTimeout(() => {
       fetchTasks();
     }, 500);
