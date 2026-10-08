@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Feather } from '@expo/vector-icons';
 import { NavigationContainer, createNavigationContainerRef } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { View, Text, ActivityIndicator, StyleSheet, TouchableOpacity, Image, ScrollView, Alert } from 'react-native';
@@ -133,12 +134,12 @@ const BottomNavigation = ({ activeRoute, onNavigate }: {
     <View style={[styles.tabBar, { backgroundColor: tokens.surface, borderColor: tokens.border, shadowColor: isDark ? '#000000' : '#173657' }]}>
       {PRIMARY_SCREENS.map(route => {
         const selected = activeRoute === route;
-        const icon = route === 'Dashboard' ? '▦' : route === 'Projects' ? '▤' : route === 'Tasks' ? '☑' : '◉';
+        const icon: React.ComponentProps<typeof Feather>['name'] = route === 'Dashboard' ? 'grid' : route === 'Projects' ? 'folder' : route === 'Tasks' ? 'check-square' : 'user';
         return (
           <TouchableOpacity key={route} style={styles.tabItem} onPress={() => onNavigate(route)}
             accessibilityRole="tab" accessibilityState={{ selected }} accessibilityLabel={route} activeOpacity={0.75}>
-            <View style={[styles.tabIconContainer, selected && { backgroundColor: isDark ? '#243D58' : '#E8F2FC' }]}>
-              <Text style={[styles.tabIcon, { color: selected ? tokens.primary : tokens.textSecondary }]}>{icon}</Text>
+            <View style={[styles.tabIconContainer, selected && { backgroundColor: isDark ? '#30264B' : '#F0E9FF' }]}>
+              <Feather name={icon} size={21} strokeWidth={2.2} color={selected ? tokens.primary : tokens.textSecondary} />
             </View>
             <Text style={[styles.tabLabel, { color: selected ? tokens.primary : tokens.textSecondary, fontWeight: selected ? '800' : '600' }]}>{route}</Text>
           </TouchableOpacity>
@@ -191,11 +192,10 @@ const styles = StyleSheet.create({
   brandMarkLetter: { color: '#FFFFFF', fontWeight: '900', fontSize: 19 },
   brandName: { fontSize: 17, fontWeight: '800', color: '#1769B1', letterSpacing: 1.6 },
   floatingDockArea: { paddingTop: 8, paddingHorizontal: 18 },
-  tabBar: { flexDirection: 'row', borderWidth: 1, paddingVertical: 8, paddingHorizontal: 6, borderRadius: 26, shadowOffset: { width: 0, height: 5 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 12 },
+  tabBar: { flexDirection: 'row', borderWidth: 1, paddingVertical: 10, paddingHorizontal: 6, borderRadius: 28, shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.12, shadowRadius: 18, elevation: 9 },
   tabItem: { flex: 1, minHeight: 52, alignItems: 'center', justifyContent: 'center' },
-  tabIconContainer: { width: 49, height: 29, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
-  tabIcon: { fontSize: 22, lineHeight: 27 },
-  tabLabel: { fontSize: 10, marginTop: 3 },
+  tabIconContainer: { width: 54, height: 34, borderRadius: 17, alignItems: 'center', justifyContent: 'center' },
+  tabLabel: { fontSize: 11, marginTop: 4, letterSpacing: 0.15 },
   accountContent: { padding: 18, paddingBottom: 32 },
   accountHeading: { fontSize: 25, fontWeight: '800', marginBottom: 4 },
   accountSubtitle: { fontSize: 13, lineHeight: 19, marginBottom: 15 },
