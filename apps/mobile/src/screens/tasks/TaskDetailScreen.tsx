@@ -130,7 +130,7 @@ export const TaskDetailScreen = () => {
   if (loading && !refreshing) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#7254D7" />
+        <ActivityIndicator size="large" color="#1769B1" />
       </View>
     );
   }
@@ -149,7 +149,7 @@ export const TaskDetailScreen = () => {
   return (
     <ScrollView 
       style={styles.container}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#7254D7']} />}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#1769B1']} />}
     >
       <View style={styles.content}>
         <View style={styles.header}>
@@ -201,7 +201,7 @@ export const TaskDetailScreen = () => {
               accessibilityLabel="Complete Task"
             >
               {isCompleting ? (
-                <ActivityIndicator color="#19243B" />
+                <ActivityIndicator color="#FFFFFF" />
               ) : (
                 <Text style={styles.completeButtonText}>Complete Task</Text>
               )}
@@ -238,32 +238,32 @@ export const TaskDetailScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1020' },
-  centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24, backgroundColor: '#0B1020' },
+  container: { flex: 1, backgroundColor: '#F4F7FB' },
+  centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24, backgroundColor: '#F4F7FB' },
   content: { padding: 20 },
   header: { marginBottom: 24 },
-  title: { fontSize: 28, fontWeight: 'bold', color: '#F7F8FF', marginBottom: 12 },
+  title: { fontSize: 28, fontWeight: 'bold', color: '#162B46', marginBottom: 12 },
   titleCompleted: { textDecorationLine: 'line-through', color: '#9ca3af' },
   badgeRow: { flexDirection: 'row', alignItems: 'center' },
   section: { marginBottom: 24 },
-  sectionTitle: { fontSize: 14, fontWeight: '600', color: '#A6B3CC', textTransform: 'uppercase', marginBottom: 6 },
-  projectName: { fontSize: 16, color: '#F7F8FF', fontWeight: '500' },
-  description: { fontSize: 16, color: '#A6B3CC', lineHeight: 24 },
+  sectionTitle: { fontSize: 14, fontWeight: '600', color: '#637991', textTransform: 'uppercase', marginBottom: 6 },
+  projectName: { fontSize: 16, color: '#162B46', fontWeight: '500' },
+  description: { fontSize: 16, color: '#637991', lineHeight: 24 },
   emptyDescription: { fontStyle: 'italic', color: '#9ca3af' },
-  detailsCard: { backgroundColor: '#19243B', borderRadius: 12, borderWidth: 1, borderColor: '#2C3852', marginBottom: 32, overflow: 'hidden' },
+  detailsCard: { backgroundColor: '#FFFFFF', borderRadius: 12, borderWidth: 1, borderColor: '#DCE5F0', marginBottom: 32, overflow: 'hidden' },
   detailRow: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 16, paddingHorizontal: 16 },
-  detailRowBorder: { borderTopWidth: 1, borderTopColor: '#26314A' },
-  detailLabel: { fontSize: 15, fontWeight: '500', color: '#A6B3CC' },
-  detailValue: { fontSize: 15, fontWeight: '500', color: '#F7F8FF' },
+  detailRowBorder: { borderTopWidth: 1, borderTopColor: '#EDF3FA' },
+  detailLabel: { fontSize: 15, fontWeight: '500', color: '#637991' },
+  detailValue: { fontSize: 15, fontWeight: '500', color: '#162B46' },
   actionsContainer: { gap: 12 },
   completeButton: { backgroundColor: '#10b981', paddingVertical: 14, borderRadius: 8, alignItems: 'center' },
-  completeButtonText: { color: '#19243B', fontSize: 16, fontWeight: '600' },
-  editButton: { backgroundColor: '#26314A', borderWidth: 1, borderColor: '#2C3852', paddingVertical: 14, borderRadius: 8, alignItems: 'center' },
-  editButtonText: { color: '#DCE4F6', fontSize: 16, fontWeight: '600' },
+  completeButtonText: { color: '#FFFFFF', fontSize: 16, fontWeight: '600' },
+  editButton: { backgroundColor: '#EDF3FA', borderWidth: 1, borderColor: '#DCE5F0', paddingVertical: 14, borderRadius: 8, alignItems: 'center' },
+  editButtonText: { color: '#263E59', fontSize: 16, fontWeight: '600' },
   deleteButton: { backgroundColor: '#fef2f2', borderWidth: 1, borderColor: '#fecaca', paddingVertical: 14, borderRadius: 8, alignItems: 'center', marginTop: 12 },
   disabledButton: { opacity: 0.7 },
   deleteButtonText: { color: '#dc2626', fontSize: 16, fontWeight: '600' },
   errorText: { fontSize: 16, color: '#dc2626', textAlign: 'center', marginBottom: 16 },
-  retryButton: { paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#26314A', borderRadius: 6 },
-  retryText: { fontSize: 14, color: '#A6B3CC', fontWeight: '500' },
+  retryButton: { paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#EDF3FA', borderRadius: 6 },
+  retryText: { fontSize: 14, color: '#637991', fontWeight: '500' },
 });
