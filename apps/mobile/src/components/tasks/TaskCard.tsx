@@ -1,3 +1,5 @@
+import { useTheme } from '../../context/ThemeContext';
+import { ThemeTokens } from '../../theme/tokens';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Task } from '../../types';
@@ -16,6 +18,8 @@ const formatDate = (dateString: string | null) => {
 };
 
 export const TaskCard = ({ task, onPress }: Props) => {
+  const { tokens, isDark } = useTheme();
+  const styles = useMemo(() => createStyles(tokens, isDark), [tokens, isDark]);
   // Add overdue indicator visually if needed, safely using JS Date
   const isOverdue = task.dueDate && new Date(task.dueDate) < new Date() && task.status !== 'COMPLETED';
 
@@ -58,14 +62,14 @@ export const TaskCard = ({ task, onPress }: Props) => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create({
   card: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: tokens.surface,
     borderRadius: 18,
     padding: 19,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#DCE5F0',
+    borderColor: tokens.border,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -82,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: '600',
-    color: '#162B46',
+    color: tokens.text,
     marginRight: 12,
   },
   titleCompleted: {
@@ -91,7 +95,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 14,
-    color: '#637991',
+    color: tokens.textSecondary,
     marginBottom: 16,
     lineHeight: 20,
   },
@@ -104,7 +108,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: '#DCE5F0',
+    borderTopColor: tokens.border,
     paddingTop: 12,
   },
   badgeRow: {
@@ -125,7 +129,7 @@ const styles = StyleSheet.create({
     fontWeight: '500',
   },
   overdueDate: {
-    color: '#dc2626',
+    color: (isDark ? '#FDA4AF' : '#DC2626'),
     fontWeight: '700',
   },
 });
