@@ -1,6 +1,6 @@
 import { useTheme } from '../../context/ThemeContext';
 import { ThemeTokens } from '../../theme/tokens';
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import {
   View,
   Text,
