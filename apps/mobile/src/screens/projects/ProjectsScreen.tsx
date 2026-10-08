@@ -198,10 +198,10 @@ export const ProjectsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#141E32',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#111827',
+    color: '#F7F8FF',
   },
   clearButton: {
     padding: 4,
