@@ -18,6 +18,7 @@ import { ApiClientError } from '../api/client';
 import { getProjects } from '../api/projects';
 import { getTasks } from '../api/tasks';
 import { Project, Task } from '../types';
+import { Feather } from '@expo/vector-icons';
 
 type AppStackParamList = {
   Dashboard: undefined;
@@ -97,6 +98,7 @@ export const DashboardScreen = () => {
       { label: 'Completed tasks', value: metrics.completedTasks, color: '#31B58B' },
     ];
     return <View style={styles.content}>
+      <View style={styles.heroCard}><View style={styles.heroTop}><View style={styles.heroIcon}><Feather name="trending-up" size={21} color="#D8C7FF" /></View><Text style={styles.heroEyebrow}>YOUR PRODUCTIVITY</Text></View><Text style={styles.heroValue}>{completion}% <Text style={styles.heroValueLabel}>completed</Text></Text><Text style={styles.heroDescription}>{metrics.totalTasks ? `${metrics.completedTasks} of ${metrics.totalTasks} tasks completed` : 'Your next milestone starts with one task.'}</Text><View style={styles.heroTrack}><View style={[styles.heroFill, { width: `${completion}%` }]} /></View><TouchableOpacity style={styles.heroAction} onPress={() => navigation.navigate('Tasks')}><Text style={styles.heroActionText}>View task board</Text><Feather name="arrow-up-right" size={16} color="#FFFFFF" /></TouchableOpacity></View>
       <View style={styles.actionsGrid}>
         <TouchableOpacity style={[styles.actionButton, styles.actionButtonSecondary]} onPress={() => navigation.navigate('TaskCreate', {})}><Text style={styles.actionButtonTextSecondary}>+ New task</Text></TouchableOpacity>
         <TouchableOpacity style={styles.actionButton} onPress={() => navigation.navigate('ProjectCreate')}><Text style={styles.actionButtonText}>+ New project</Text></TouchableOpacity>
@@ -118,7 +120,7 @@ export const DashboardScreen = () => {
         <View style={styles.sectionHeading}><View><Text style={styles.sectionTitle}>Upcoming tasks</Text><Text style={styles.sectionSubtitle}>Stay focused on what needs attention</Text></View><TouchableOpacity onPress={() => navigation.navigate('Tasks')}><Text style={styles.sectionLink}>View tasks →</Text></TouchableOpacity></View>
         {upcoming.length ? upcoming.map(task => <TouchableOpacity key={task.id} style={styles.taskRow} onPress={() => navigation.navigate('TaskDetail', { id: task.id })}><View style={styles.taskCheckbox}/><View style={styles.rowBody}><Text style={styles.rowTitle} numberOfLines={1}>{task.name}</Text><Text style={styles.rowSubtitle}>{task.priority.toLowerCase()} priority · {task.dueDate ? new Date(task.dueDate).toLocaleDateString(undefined, { month: 'short', day: 'numeric' }) : 'No due date'}</Text></View><Text style={styles.rowArrow}>›</Text></TouchableOpacity>) : <Text style={styles.emptyText}>No open tasks. You're all caught up.</Text>}
       </View>
-      <View style={styles.sectionCard}><Text style={styles.sectionTitle}>Quick access</Text><Text style={styles.sectionSubtitle}>Jump back into your workflow</Text><TouchableOpacity style={styles.listRow} onPress={() => navigation.navigate('Projects')}><Text style={styles.rowTitle}>▦   Manage projects</Text><Text style={styles.rowArrow}>›</Text></TouchableOpacity><TouchableOpacity style={styles.listRow} onPress={() => navigation.navigate('Tasks')}><Text style={styles.rowTitle}>☑   Task board</Text><Text style={styles.rowArrow}>›</Text></TouchableOpacity></View>
+
     </View>;
   };
 
@@ -139,6 +141,17 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   content: { paddingHorizontal: 16, paddingBottom: 44 },
   centerContainer: { padding: 30, minHeight: 220, justifyContent: 'center', alignItems: 'center' },
   errorText: { color: '#FCA5A5', marginBottom: 14, textAlign: 'center' },
+  heroCard: { backgroundColor: '#241B43', borderRadius: 24, padding: 22, marginBottom: 16, borderWidth: 1, borderColor: '#47346F' },
+  heroTop: { flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 16 },
+  heroIcon: { backgroundColor: '#403063', width: 39, height: 39, borderRadius: 13, alignItems: 'center', justifyContent: 'center' },
+  heroEyebrow: { color: '#C8B4F8', fontSize: 11, fontWeight: '800', letterSpacing: 1.5 },
+  heroValue: { color: '#FFFFFF', fontSize: 40, fontWeight: '800' },
+  heroValueLabel: { color: '#C8B4F8', fontSize: 14, fontWeight: '600' },
+  heroDescription: { color: '#D1C6E8', fontSize: 13, marginTop: 6, marginBottom: 18 },
+  heroTrack: { height: 8, borderRadius: 8, overflow: 'hidden', backgroundColor: '#51426F' },
+  heroFill: { height: '100%', backgroundColor: '#B79AFF', borderRadius: 8 },
+  heroAction: { flexDirection: 'row', alignItems: 'center', gap: 8, marginTop: 18 },
+  heroActionText: { color: '#FFFFFF', fontSize: 13, fontWeight: '700' },
   actionsGrid: { flexDirection: 'row', justifyContent: 'space-between', marginBottom: 14 },
   actionButton: { width: '48%', minHeight: 48, backgroundColor: tokens.primary, borderRadius: 12, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 8 },
   actionButtonSecondary: { backgroundColor: tokens.surface, borderWidth: 1, borderColor: tokens.border },
