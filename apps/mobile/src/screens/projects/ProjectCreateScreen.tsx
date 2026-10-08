@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, StyleSheet, ScrollView, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -13,6 +14,7 @@ type AppStackParamList = {
 type ProjectCreateScreenNavigationProp = NativeStackNavigationProp<AppStackParamList, 'Projects'>;
 
 export const ProjectCreateScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<ProjectCreateScreenNavigationProp>();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -39,7 +41,7 @@ export const ProjectCreateScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 88 : 0}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+      <ScrollView contentContainerStyle={[styles.scrollContainer, { paddingBottom: Math.max(insets.bottom, 24) + 40 }]} keyboardShouldPersistTaps="handled">
         <ProjectForm
           onSubmit={handleSubmit}
           isSubmitting={isSubmitting}
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F7FB',
   },
   scrollContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 24,
   },
 });
