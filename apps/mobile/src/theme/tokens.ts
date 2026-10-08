@@ -1,20 +1,20 @@
 export const lightTokens = {
-  background: '#F5F8FC',
+  background: '#F7F9FC',
   surface: '#FFFFFF',
-  primary: '#167CBA',
-  text: '#14283F',
-  textSecondary: '#59738A',
+  primary: '#2563EB',
+  text: '#17243A',
+  textSecondary: '#64748B',
   success: '#14B8A6',
   iris: '#6474D9',
   border: '#E2E8F0', // minimal reusable utility
 };
 
 export const darkTokens = {
-  background: '#0B1526',
-  surface: '#16263B',
-  primary: '#218FD2',
+  background: '#0B1220',
+  surface: '#172235',
+  primary: '#60A5FA',
   text: '#F1F7FF',
-  textSecondary: '#A5BCD1',
+  textSecondary: '#A9BCD1',
   success: '#5EEAD4',
   iris: '#8996FF',
   border: '#2A3F54',
