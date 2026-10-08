@@ -44,7 +44,7 @@ export default function DashboardPage() {
   const activeProjects = projects.filter(p => p.status !== 'COMPLETED');
   const stats = metrics ? [
     { label: 'Total projects', value: metrics.totalProjects, accent: 'bg-violet-400' },
-    { label: 'In progress', value: metrics.projectsInProgress, accent: 'bg-sky-400' },
+    { label: 'In progress', value: metrics.projectsInProgress, accent: 'bg-violet-300' },
     { label: 'Open tasks', value: metrics.pendingTasks, accent: 'bg-amber-400' },
     { label: 'Completed tasks', value: metrics.completedTasks, accent: 'bg-emerald-400' },
   ] : [];
@@ -67,6 +67,20 @@ export default function DashboardPage() {
         {loading ? <div className="nex-glass animate-pulse rounded-2xl p-10 text-text-secondary">Loading your workspace…</div> :
         error ? <div role="alert" className="nex-glass rounded-2xl p-6"><h2 className="font-semibold text-text">Unable to load dashboard</h2><p className="mt-2 text-sm text-text-secondary">{error}</p><button onClick={() => void load()} className="mt-4 rounded-lg bg-primary px-4 py-2 text-sm font-semibold text-white">Try again</button></div> :
         metrics && <>
+          <section className="nex-productivity relative overflow-hidden rounded-3xl p-6 text-white sm:p-8">
+            <div aria-hidden="true" className="pointer-events-none absolute -right-12 -top-20 h-64 w-64 rounded-full bg-violet-300/10 blur-3xl" />
+            <div className="relative flex flex-wrap items-start justify-between gap-5">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[.18em] text-violet-200">Your productivity</p>
+                <p className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{completion}% <span className="text-base font-medium text-violet-200">completed</span></p>
+                <p className="mt-2 text-sm text-violet-100">{metrics.totalTasks ? `${metrics.completedTasks} of ${metrics.totalTasks} tasks completed` : 'Your next milestone starts with one task.'}</p>
+              </div>
+              <Link href="/tasks" className="inline-flex items-center gap-2 rounded-xl border border-white/25 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/20">View task board ↗</Link>
+            </div>
+            <div className="nex-productivity-track relative mt-6 h-2.5 overflow-hidden rounded-full" role="progressbar" aria-label="Task completion" aria-valuemin={0} aria-valuemax={100} aria-valuenow={completion}>
+              <div className="h-full rounded-full bg-violet-300 transition-all" style={{ width: `${completion}%` }} />
+            </div>
+          </section>
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
             {stats.map(s => <div key={s.label} className="nex-glass rounded-2xl p-4 sm:p-5">
               <div className="flex items-center gap-2 text-xs font-medium text-text-secondary"><span className={`h-2 w-2 rounded-full ${s.accent}`} />{s.label}</div>
@@ -82,7 +96,7 @@ export default function DashboardPage() {
               </div>
               {activeProjects.length ? <div className="space-y-3">
                 {activeProjects.slice(0,6).map((p,i) => <Link key={p.id} href={`/projects/${p.id}`} className="group flex items-center gap-4 rounded-xl border border-border bg-background/40 p-3 transition hover:border-primary/50">
-                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white ${['bg-violet-500','bg-sky-500','bg-indigo-500','bg-teal-500'][i%4]}`}>{p.name.charAt(0).toUpperCase()}</div>
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-sm font-bold text-white ${['bg-violet-500','bg-purple-500','bg-indigo-500','bg-fuchsia-500'][i%4]}`}>{p.name.charAt(0).toUpperCase()}</div>
                   <div className="min-w-0 flex-1"><p className="truncate text-sm font-semibold text-text group-hover:text-primary">{p.name}</p><p className="mt-1 truncate text-xs text-text-secondary">{p.description || 'No description yet'}</p></div>
                   <div className="hidden text-right sm:block"><span className="rounded-full border border-border px-2.5 py-1 text-xs text-text-secondary">{statusText(p.status)}</span><p className="mt-2 text-[11px] text-text-secondary">{p.endDate ? `Due ${dateLabel(p.endDate)}` : 'No deadline'}</p></div>
                   <span className="text-text-secondary">→</span>
