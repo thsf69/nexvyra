@@ -1,3 +1,5 @@
+import { useTheme } from '../../context/ThemeContext';
+import { ThemeTokens } from '../../theme/tokens';
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
   View,
@@ -35,6 +37,8 @@ const STATUS_FILTERS: { label: string; value: string }[] = [
 ];
 
 export const ProjectsScreen = () => {
+  const { tokens, isDark } = useTheme();
+  const styles = useMemo(() => createStyles(tokens, isDark), [tokens, isDark]);
   const navigation = useNavigation<ProjectsScreenNavigationProp>();
   
   const [projects, setProjects] = useState<Project[]>([]);
@@ -178,7 +182,7 @@ export const ProjectsScreen = () => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmptyComponent}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#1769B1']} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={[tokens.primary]} />
           }
         />
       )}
@@ -195,21 +199,21 @@ export const ProjectsScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F4F7FB',
+    backgroundColor: tokens.background,
   },
   header: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: tokens.surface,
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#e5e7eb',
+    borderBottomColor: tokens.border,
   },
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#EDF3FA',
+    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
     borderRadius: 8,
     paddingHorizontal: 12,
     marginBottom: 12,
@@ -218,13 +222,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#162B46',
+    color: tokens.text,
   },
   clearButton: {
     padding: 4,
   },
   clearButtonText: {
-    color: '#637991',
+    color: tokens.textSecondary,
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -236,20 +240,20 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 9999,
-    backgroundColor: '#EDF3FA',
+    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
     marginRight: 8,
     marginBottom: 8,
   },
   filterPillActive: {
-    backgroundColor: '#e0e7ff',
+    backgroundColor: (isDark ? '#284563' : (isDark ? '#284563' : '#E8F2FC')),
   },
   filterText: {
     fontSize: 13,
-    color: '#637991',
+    color: tokens.textSecondary,
     fontWeight: '500',
   },
   filterTextActive: {
-    color: '#1769B1',
+    color: tokens.primary,
   },
   listContent: {
     padding: 16,
@@ -263,31 +267,31 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#637991',
+    color: tokens.textSecondary,
     textAlign: 'center',
   },
   errorText: {
     fontSize: 16,
-    color: '#dc2626',
+    color: (isDark ? '#FDA4AF' : '#DC2626'),
     textAlign: 'center',
     marginBottom: 16,
   },
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#EDF3FA',
+    backgroundColor: (isDark ? '#22364D' : '#EDF3FA'),
     borderRadius: 6,
   },
   retryText: {
     fontSize: 14,
-    color: '#637991',
+    color: tokens.textSecondary,
     fontWeight: '500',
   },
   fab: {
     position: 'absolute',
     right: 20,
     bottom: Platform.OS === 'ios' ? 40 : 20,
-    backgroundColor: '#1769B1',
+    backgroundColor: tokens.primary,
     width: 56,
     height: 56,
     borderRadius: 28,
@@ -301,7 +305,7 @@ const styles = StyleSheet.create({
   },
   fabText: {
     fontSize: 28,
-    color: '#fff',
+    color: tokens.surface,
     lineHeight: 32,
   },
 });
