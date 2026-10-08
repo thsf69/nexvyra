@@ -130,7 +130,7 @@ export const LoginScreen = () => {
           accessibilityLabel={isSubmitting ? 'Signing in' : 'Sign in'}
         >
           {isSubmitting ? (
-            <ActivityIndicator color="#19243B" />
+            <ActivityIndicator color="#FFFFFF" />
           ) : (
             <Text style={styles.buttonText}>Sign in</Text>
           )}
@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#19243B',
-    borderColor: '#d1d5db',
+    borderColor: '#34405B',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
@@ -218,7 +218,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   buttonText: {
-    color: '#19243B',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
