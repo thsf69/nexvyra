@@ -172,7 +172,7 @@ export const RegisterScreen = () => {
             accessibilityLabel={isSubmitting ? 'Registering' : 'Register'}
           >
             {isSubmitting ? (
-              <ActivityIndicator color="#19243B" />
+              <ActivityIndicator color="#FFFFFF" />
             ) : (
               <Text style={styles.buttonText}>Register</Text>
             )}
@@ -243,7 +243,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: '#19243B',
-    borderColor: '#d1d5db',
+    borderColor: '#34405B',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     opacity: 0.7,
   },
   buttonText: {
-    color: '#19243B',
+    color: '#FFFFFF',
     fontSize: 16,
     fontWeight: '600',
   },
