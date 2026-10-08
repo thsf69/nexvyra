@@ -168,7 +168,13 @@ export const RootNavigator = () => {
         {isAuthenticated ? <AppNavigator /> : <AuthNavigator />}
       </NavigationContainer>
       {showTabs && <BottomNavigation activeRoute={activeRoute as PrimaryScreen}
-        onNavigate={route => { if (route !== activeRoute && navigationRef.isReady()) navigationRef.navigate(route); }} />}
+        onNavigate={route => {
+          if (route !== activeRoute && navigationRef.isReady()) {
+            // Primary tabs are destinations, not a growing back stack.
+            // Resetting prevents previous tabs from appearing behind the current tab.
+            navigationRef.reset({ index: 0, routes: [{ name: route }] });
+          }
+        }} />}
     </View>
   );
 };
