@@ -10,6 +10,7 @@
   --text-secondary: #59738A;
   --success: #14B8A6;
   --iris: #6474D9;
+  --border: #E2E8F0;
 }
 
 [data-theme='dark'] {
@@ -20,6 +21,7 @@
   --text-secondary: #A5BCD1;
   --success: #5EEAD4;
   --iris: #8996FF;
+  --border: #2A3F54;
 }
 
 body {
