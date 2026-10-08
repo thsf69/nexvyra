@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { Appearance, ColorSchemeName } from 'react-native';
-import * as SecureStore from 'expo-secure-store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { lightTokens, darkTokens, ThemeTokens } from '../theme/tokens';
 
 type ThemeMode = 'light' | 'dark' | 'system';
@@ -24,7 +24,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
     // Load persisted theme
     const loadTheme = async () => {
       try {
-        const saved = await SecureStore.getItemAsync(THEME_STORAGE_KEY);
+        const saved = await AsyncStorage.getItem(THEME_STORAGE_KEY);
         if (saved === 'light' || saved === 'dark' || saved === 'system') {
           setModeState(saved);
         }
@@ -45,7 +45,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const setMode = async (newMode: ThemeMode) => {
     setModeState(newMode);
     try {
-      await SecureStore.setItemAsync(THEME_STORAGE_KEY, newMode);
+      await AsyncStorage.setItem(THEME_STORAGE_KEY, newMode);
     } catch (e) {
       console.error('Failed to save theme preference', e);
     }
