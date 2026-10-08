@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderRadius: 8,
     paddingHorizontal: 12,
     marginBottom: 12,
@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   clearButtonText: {
-    color: '#6b7280',
+    color: '#A6B3CC',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 9999,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     marginRight: 8,
     marginBottom: 8,
   },
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 13,
-    color: '#4b5563',
+    color: '#A6B3CC',
     fontWeight: '500',
   },
   filterTextActive: {
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#6b7280',
+    color: '#A6B3CC',
     textAlign: 'center',
   },
   errorText: {
@@ -275,12 +275,12 @@ const styles = StyleSheet.create({
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderRadius: 6,
   },
   retryText: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#A6B3CC',
     fontWeight: '500',
   },
   fab: {
