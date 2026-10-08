@@ -20,6 +20,7 @@ import { getTasks } from '../../api/tasks';
 import { getProjects } from '../../api/projects';
 import { ApiClientError } from '../../api/client';
 import { TaskCard } from '../../components/tasks/TaskCard';
+import { Feather } from '@expo/vector-icons';
 
 type AppStackParamList = {
   Dashboard: undefined;
@@ -145,11 +146,10 @@ export const TasksScreen = () => {
     }
     return (
       <View style={styles.centerContainer}>
-        <Text style={styles.emptyText}>
-          {searchQuery || statusFilter || priorityFilter || projectIdFilter
-            ? 'No tasks match your filters.'
-            : "You don't have any tasks yet."}
-        </Text>
+        <View style={styles.emptyIcon}><Feather name="check-square" size={28} color={tokens.primary} /></View>
+        <Text style={styles.emptyTitle}>{searchQuery || statusFilter || priorityFilter || projectIdFilter ? 'No matching tasks' : 'Make your first task'}</Text>
+        <Text style={styles.emptyText}>{searchQuery || statusFilter || priorityFilter || projectIdFilter ? 'Try adjusting your filters to see more tasks.' : 'Create a task to start tracking your work.'}</Text>
+        <TouchableOpacity style={styles.emptyButton} onPress={() => searchQuery || statusFilter || priorityFilter || projectIdFilter ? (setSearchQuery(''), setStatusFilter(''), setPriorityFilter(''), setProjectIdFilter('')) : navigation.navigate('TaskCreate', {})}><Text style={styles.emptyButtonText}>{searchQuery || statusFilter || priorityFilter || projectIdFilter ? 'Clear filters' : '+ Create task'}</Text></TouchableOpacity>
       </View>
     );
   };
@@ -164,7 +164,7 @@ export const TasksScreen = () => {
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Filter by Project</Text>
           {loadingProjects ? (
-            <ActivityIndicator style={{ margin: 20 }} color="#1769B1" />
+            <ActivityIndicator style={{ margin: 20 }} color={tokens.primary} />
           ) : (
             <FlatList
               data={[{ id: '', name: 'All Projects' }, ...projects]}
@@ -265,7 +265,7 @@ export const TasksScreen = () => {
 
       {loading && !refreshing ? (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#1769B1" />
+          <ActivityIndicator size="large" color={tokens.primary} />
         </View>
       ) : (
         <FlatList
@@ -308,7 +308,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#f3f4f6',
+    backgroundColor: (isDark ? '#273149' : '#F0F0F8'),
     borderRadius: 12,
     borderWidth: 1,
     borderColor: tokens.border,
@@ -322,7 +322,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     color: tokens.text,
   },
   clearButton: { padding: 4 },
-  clearButtonText: { color: '#6b7280', fontSize: 16, fontWeight: 'bold' },
+  clearButtonText: { color: tokens.textSecondary, fontSize: 16, fontWeight: 'bold' },
   projectFilterButton: {
     paddingVertical: 8,
     paddingHorizontal: 12,
@@ -332,7 +332,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     alignItems: 'center',
   },
   projectFilterText: {
-    color: '#374151',
+    color: tokens.text,
     fontWeight: '600',
     fontSize: 14,
   },
@@ -355,11 +355,15 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     backgroundColor: '#f3f4f6',
     marginRight: 8,
   },
-  filterPillActive: { backgroundColor: (isDark ? '#30264B' : (isDark ? '#30264B' : '#F0E9FF')) },
-  filterText: { fontSize: 13, color: '#4b5563', fontWeight: '500' },
+  filterPillActive: { backgroundColor: (isDark ? '#30264B' : '#F0E9FF') },
+  filterText: { fontSize: 13, color: tokens.textSecondary, fontWeight: '500' },
   filterTextActive: { color: tokens.primary },
-  listContent: { padding: 16, flexGrow: 1 },
-  centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
+  listContent: { padding: 16 },
+  centerContainer: { justifyContent: 'center', alignItems: 'center', padding: 24, minHeight: 240, marginTop: 22, backgroundColor: tokens.surface, borderWidth: 1, borderColor: tokens.border, borderRadius: 18 },
+  emptyIcon: { width: 62, height: 62, borderRadius: 18, backgroundColor: isDark ? '#30264B' : '#F0E9FF', alignItems: 'center', justifyContent: 'center', marginBottom: 14 },
+  emptyTitle: { fontSize: 17, fontWeight: '700', color: tokens.text, marginBottom: 6, textAlign: 'center' },
+  emptyButton: { backgroundColor: tokens.primary, borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, marginTop: 18 },
+  emptyButtonText: { color: isDark ? '#101729' : '#FFFFFF', fontSize: 14, fontWeight: '700' },
   emptyText: { fontSize: 16, color: '#6b7280', textAlign: 'center' },
   errorText: { fontSize: 16, color: (isDark ? '#FDA4AF' : '#DC2626'), textAlign: 'center', marginBottom: 16 },
   retryButton: { paddingHorizontal: 16, paddingVertical: 8, backgroundColor: '#f3f4f6', borderRadius: 6 },
@@ -370,11 +374,11 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 4,
   },
-  fabText: { fontSize: 28, color: tokens.surface, lineHeight: 32 },
+  fabText: { fontSize: 28, color: '#FFFFFF', lineHeight: 32 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
   modalContent: { backgroundColor: tokens.surface, borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
   modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: tokens.text },
-  modalItem: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
+  modalItem: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: tokens.border },
   modalItemActive: { backgroundColor: tokens.background },
   modalItemText: { fontSize: 16, color: '#374151' },
   modalItemTextActive: { color: tokens.primary, fontWeight: '600' },
