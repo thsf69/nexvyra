@@ -200,7 +200,7 @@ export const TasksScreen = () => {
         <View style={styles.searchContainer}>
           <TextInput
             style={styles.searchInput}
-            placeholder="Search tasks..."
+            placeholder="Search tasks..." placeholderTextColor={tokens.textSecondary}
             value={searchQuery}
             onChangeText={setSearchQuery}
             accessibilityLabel="Search tasks"
@@ -309,7 +309,9 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#f3f4f6',
-    borderRadius: 8,
+    borderRadius: 12,
+    borderWidth: 1,
+    borderColor: tokens.border,
     paddingHorizontal: 12,
     marginBottom: 12,
   },
@@ -353,7 +355,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     backgroundColor: '#f3f4f6',
     marginRight: 8,
   },
-  filterPillActive: { backgroundColor: (isDark ? '#284563' : (isDark ? '#284563' : '#E8F2FC')) },
+  filterPillActive: { backgroundColor: (isDark ? '#30264B' : (isDark ? '#30264B' : '#F0E9FF')) },
   filterText: { fontSize: 13, color: '#4b5563', fontWeight: '500' },
   filterTextActive: { color: tokens.primary },
   listContent: { padding: 16, flexGrow: 1 },
