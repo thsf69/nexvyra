@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/layout/AppShell';
 import { TaskForm, TaskFormData } from '@/components/tasks/TaskForm';
@@ -9,7 +9,8 @@ import { Task } from '@/types';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export default function EditTaskPage({ params }: { params: { id: string } }) {
+export default function EditTaskPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const [task, setTask] = useState<Task | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,7 +20,7 @@ export default function EditTaskPage({ params }: { params: { id: string } }) {
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await getTask(params.id);
+        const res = await getTask(id);
         setTask(res.data?.task || null);
       } catch (err: any) {
         setError(err.status === 404 ? 'Task not found.' : err.message || 'Failed to load task.');
@@ -28,13 +29,13 @@ export default function EditTaskPage({ params }: { params: { id: string } }) {
       }
     };
     fetchTask();
-  }, [params.id]);
+  }, [id]);
 
   const handleSubmit = async (data: TaskFormData) => {
     setIsSubmitting(true);
     try {
-      await updateTask(params.id, data);
-      router.push(`/tasks/${params.id}`);
+      await updateTask(id, data);
+      router.push(`/tasks/${id}`);
     } finally {
       setIsSubmitting(false);
     }

@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AppShell } from '@/components/layout/AppShell';
@@ -14,7 +14,8 @@ import { TaskPriorityBadge } from '@/components/tasks/TaskPriorityBadge';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export default function ProjectDetailsPage({ params }: { params: { id: string } }) {
+export default function ProjectDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const [project, setProject] = useState<Project | null>(null);
   const [tasks, setTasks] = useState<Task[]>([]);
@@ -26,8 +27,8 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
     const fetchData = async () => {
       try {
         const [projectRes, tasksRes] = await Promise.all([
-          getProject(params.id),
-          getTasks({ projectId: params.id })
+          getProject(id),
+          getTasks({ projectId: id })
         ]);
         setProject(projectRes.data?.project || null);
         setTasks(tasksRes.data?.tasks || []);
@@ -38,7 +39,7 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
       }
     };
     fetchData();
-  }, [params.id]);
+  }, [id]);
 
   const handleDelete = async () => {
     if (!window.confirm('Delete this project? This will also delete all associated tasks immediately and cannot be undone.')) {
@@ -47,7 +48,7 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
     
     setIsDeleting(true);
     try {
-      await deleteProject(params.id);
+      await deleteProject(id);
       router.push('/projects');
     } catch (err: any) {
       setError(err.message || 'Failed to delete project.');

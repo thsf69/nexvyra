@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { AppShell } from '@/components/layout/AppShell';
@@ -11,7 +11,8 @@ import { TaskPriorityBadge } from '@/components/tasks/TaskPriorityBadge';
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-export default function TaskDetailsPage({ params }: { params: { id: string } }) {
+export default function TaskDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const [task, setTask] = useState<Task | null>(null);
   const [project, setProject] = useState<Project | null>(null);
@@ -23,7 +24,7 @@ export default function TaskDetailsPage({ params }: { params: { id: string } }) 
   useEffect(() => {
     const fetchTask = async () => {
       try {
-        const res = await getTask(params.id);
+        const res = await getTask(id);
         setTask(res.data?.task || null);
         setProject(res.data?.project || null);
       } catch (err: any) {
@@ -33,7 +34,7 @@ export default function TaskDetailsPage({ params }: { params: { id: string } }) 
       }
     };
     fetchTask();
-  }, [params.id]);
+  }, [id]);
 
   const handleDelete = async () => {
     if (!window.confirm('Delete this task? This action cannot be undone.')) {
@@ -42,7 +43,7 @@ export default function TaskDetailsPage({ params }: { params: { id: string } }) 
     
     setIsDeleting(true);
     try {
-      await deleteTask(params.id);
+      await deleteTask(id);
       router.push('/tasks');
     } catch (err: any) {
       setError(err.message || 'Failed to delete task.');
@@ -55,7 +56,7 @@ export default function TaskDetailsPage({ params }: { params: { id: string } }) 
     setIsCompleting(true);
     setError('');
     try {
-      const res = await updateTask(params.id, { status: 'COMPLETED' });
+      const res = await updateTask(id, { status: 'COMPLETED' });
       setTask(res.data?.task || null);
     } catch (err: any) {
       setError(err.message || 'Failed to complete task.');

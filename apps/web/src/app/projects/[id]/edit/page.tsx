@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { use, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { AppShell } from '@/components/layout/AppShell';
 import { ProjectForm, ProjectFormData } from '@/components/projects/ProjectForm';
 import { getProject, updateProject } from '@/lib/api/projects';
 import { Project } from '@/types';
 
-export default function EditProjectPage({ params }: { params: { id: string } }) {
+export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params);
   const router = useRouter();
   const [project, setProject] = useState<Project | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,7 +19,7 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
   useEffect(() => {
     const fetchProject = async () => {
       try {
-        const res = await getProject(params.id);
+        const res = await getProject(id);
         setProject(res.data?.project || null);
       } catch (err: any) {
         setError(err.status === 404 ? 'Project not found.' : err.message || 'Failed to load project.');
@@ -27,13 +28,13 @@ export default function EditProjectPage({ params }: { params: { id: string } }) 
       }
     };
     fetchProject();
-  }, [params.id]);
+  }, [id]);
 
   const handleSubmit = async (data: ProjectFormData) => {
     setIsSubmitting(true);
     try {
-      await updateProject(params.id, data);
-      router.push(`/projects/${params.id}`);
+      await updateProject(id, data);
+      router.push(`/projects/${id}`);
     } finally {
       setIsSubmitting(false);
     }
