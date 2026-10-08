@@ -18,6 +18,7 @@ import { Project, ProjectStatus } from '../../types';
 import { getProjects } from '../../api/projects';
 import { ApiClientError } from '../../api/client';
 import { ProjectCard } from '../../components/projects/ProjectCard';
+import { Feather } from '@expo/vector-icons';
 
 type AppStackParamList = {
   Dashboard: undefined;
@@ -113,11 +114,10 @@ export const ProjectsScreen = () => {
     }
     return (
       <View style={styles.centerContainer}>
-        <Text style={styles.emptyText}>
-          {searchQuery || statusFilter
-            ? 'No projects match your filters.'
-            : "You don't have any projects yet."}
-        </Text>
+        <View style={styles.emptyIcon}><Feather name="folder-plus" size={28} color={tokens.primary} /></View>
+        <Text style={styles.emptyTitle}>{searchQuery || statusFilter ? 'No matching projects' : 'Your workspace starts here'}</Text>
+        <Text style={styles.emptyText}>{searchQuery || statusFilter ? 'Try a different search or status.' : 'Create a project to organize your work and track progress.'}</Text>
+        <TouchableOpacity style={styles.emptyButton} onPress={() => searchQuery || statusFilter ? (setSearchQuery(''), setStatusFilter('')) : navigation.navigate('ProjectCreate')}><Text style={styles.emptyButtonText}>{searchQuery || statusFilter ? 'Clear filters' : '+ Create project'}</Text></TouchableOpacity>
       </View>
     );
   };
@@ -167,7 +167,7 @@ export const ProjectsScreen = () => {
 
       {loading && !refreshing ? (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#1769B1" />
+          <ActivityIndicator size="large" color={tokens.primary} />
         </View>
       ) : (
         <FlatList
@@ -247,7 +247,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
     marginBottom: 8,
   },
   filterPillActive: {
-    backgroundColor: (isDark ? '#30264B' : (isDark ? '#30264B' : '#F0E9FF')),
+    backgroundColor: (isDark ? '#30264B' : '#F0E9FF'),
   },
   filterText: {
     fontSize: 13,
@@ -259,18 +259,27 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   },
   listContent: {
     padding: 16,
-    flexGrow: 1,
   },
   centerContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
-    minHeight: 190,
+    minHeight: 240,
+    marginTop: 22,
+    backgroundColor: tokens.surface,
+    borderWidth: 1,
+    borderColor: tokens.border,
+    borderRadius: 18,
   },
+  emptyIcon: { width: 62, height: 62, borderRadius: 18, backgroundColor: isDark ? '#30264B' : '#F0E9FF', alignItems: 'center', justifyContent: 'center', marginBottom: 14 },
+  emptyTitle: { fontSize: 17, fontWeight: '700', color: tokens.text, marginBottom: 6, textAlign: 'center' },
+  emptyButton: { backgroundColor: tokens.primary, borderRadius: 12, paddingHorizontal: 20, paddingVertical: 12, marginTop: 18 },
+  emptyButtonText: { color: isDark ? '#101729' : '#FFFFFF', fontSize: 14, fontWeight: '700' },
   emptyText: {
     fontSize: 16,
     color: tokens.textSecondary,
     textAlign: 'center',
+    lineHeight: 22,
   },
   errorText: {
     fontSize: 16,
