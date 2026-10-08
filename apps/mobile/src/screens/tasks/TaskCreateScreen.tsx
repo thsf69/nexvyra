@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { View, StyleSheet, ScrollView, Platform, KeyboardAvoidingView, Alert } from 'react-native';
 import { useNavigation, useRoute, RouteProp } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -15,6 +16,7 @@ type TaskCreateScreenRouteProp = RouteProp<AppStackParamList, 'TaskCreate'>;
 type TaskCreateScreenNavigationProp = NativeStackNavigationProp<AppStackParamList, 'Tasks'>;
 
 export const TaskCreateScreen = () => {
+  const insets = useSafeAreaInsets();
   const navigation = useNavigation<TaskCreateScreenNavigationProp>();
   const route = useRoute<TaskCreateScreenRouteProp>();
   const defaultProjectId = route.params?.projectId;
@@ -43,7 +45,7 @@ export const TaskCreateScreen = () => {
       behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 88 : 0}
     >
-      <ScrollView contentContainerStyle={styles.scrollContainer} keyboardShouldPersistTaps="handled">
+      <ScrollView contentContainerStyle={[styles.scrollContainer, { paddingBottom: Math.max(insets.bottom, 24) + 40 }]} keyboardShouldPersistTaps="handled">
         <TaskForm
           defaultProjectId={defaultProjectId}
           onSubmit={handleSubmit}
@@ -61,6 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F4F7FB',
   },
   scrollContainer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 24,
   },
 });
