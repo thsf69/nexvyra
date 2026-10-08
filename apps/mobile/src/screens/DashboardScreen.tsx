@@ -73,7 +73,7 @@ export const DashboardScreen = () => {
     if (loading && !refreshing) {
       return (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#4f46e5" />
+          <ActivityIndicator size="large" color="#7254D7" />
         </View>
       );
     }
@@ -193,7 +193,7 @@ export const DashboardScreen = () => {
     <ScrollView
       style={styles.container}
       refreshControl={
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#4f46e5']} />
+        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#7254D7']} />
       }
     >
       <View style={styles.header}>
@@ -208,7 +208,7 @@ export const DashboardScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   centerContainer: {
     padding: 32,
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
     minHeight: 200,
   },
   header: {
-    backgroundColor: '#4f46e5',
+    backgroundColor: '#121B30',
     paddingVertical: 32,
     paddingHorizontal: 20,
     borderBottomLeftRadius: 24,
@@ -225,14 +225,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   brandText: {
-    color: '#a5b4fc',
+    color: '#C2B4FF',
     fontSize: 14,
     fontWeight: '700',
     letterSpacing: 1.5,
     marginBottom: 4,
   },
   greetingText: {
-    color: '#ffffff',
+    color: '#19243B',
     fontSize: 24,
     fontWeight: 'bold',
   },
@@ -241,12 +241,12 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   progressCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#19243B',
     borderRadius: 16,
     padding: 20,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -256,30 +256,30 @@ const styles = StyleSheet.create({
   progressTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#111827',
+    color: '#F7F8FF',
     marginBottom: 12,
   },
   progressEmptyText: {
     fontSize: 14,
-    color: '#6b7280',
+    color: '#A6B3CC',
     fontStyle: 'italic',
   },
   progressBarBackground: {
     height: 8,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderRadius: 4,
     overflow: 'hidden',
     marginBottom: 8,
   },
   progressBarFill: {
     height: '100%',
-    backgroundColor: '#10b981',
+    backgroundColor: '#9575FF',
     borderRadius: 4,
   },
   progressPercent: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#374151',
+    color: '#DCE4F6',
     textAlign: 'right',
   },
   metricsGrid: {
@@ -289,39 +289,39 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
   metricCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#19243B',
     width: '48%',
     borderRadius: 16,
     padding: 16,
     marginBottom: 16,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
   },
   metricCardHighlight: {
-    backgroundColor: '#f0fdf4',
-    borderColor: '#bbf7d0',
+    backgroundColor: '#29224A',
+    borderColor: '#6E56B7',
   },
   metricLabel: {
     fontSize: 13,
-    color: '#6b7280',
+    color: '#A6B3CC',
     fontWeight: '500',
     marginBottom: 8,
   },
   metricLabelHighlight: {
-    color: '#166534',
+    color: '#C2B4FF',
   },
   metricValue: {
     fontSize: 24,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F7F8FF',
   },
   metricValueHighlight: {
-    color: '#166534',
+    color: '#C2B4FF',
   },
   sectionTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F7F8FF',
     marginBottom: 16,
   },
   quickActionsContainer: {
@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   actionButton: {
-    backgroundColor: '#4f46e5',
+    backgroundColor: '#7254D7',
     width: '48%',
     paddingVertical: 14,
     borderRadius: 12,
@@ -343,39 +343,39 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   actionButtonText: {
-    color: '#ffffff',
+    color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
   },
   actionButtonSecondary: {
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
   },
   actionButtonTextSecondary: {
-    color: '#374151',
+    color: '#DCE4F6',
     fontSize: 14,
     fontWeight: '600',
   },
   emptyStateContainer: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#19243B',
     borderRadius: 16,
     padding: 32,
     alignItems: 'center',
     marginBottom: 24,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
   },
   emptyStateTitle: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F7F8FF',
     marginBottom: 8,
     textAlign: 'center',
   },
   emptyStateSubtitle: {
     fontSize: 15,
-    color: '#4b5563',
+    color: '#A6B3CC',
     textAlign: 'center',
     lineHeight: 22,
   },
@@ -388,14 +388,14 @@ const styles = StyleSheet.create({
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderRadius: 6,
     minHeight: 52,
     justifyContent: 'center',
   },
   retryText: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#A6B3CC',
     fontWeight: '500',
   },
 });
