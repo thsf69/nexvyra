@@ -154,7 +154,7 @@ export const TasksScreen = () => {
         <View style={styles.modalContent}>
           <Text style={styles.modalTitle}>Filter by Project</Text>
           {loadingProjects ? (
-            <ActivityIndicator style={{ margin: 20 }} color="#4f46e5" />
+            <ActivityIndicator style={{ margin: 20 }} color="#1769B1" />
           ) : (
             <FlatList
               data={[{ id: '', name: 'All Projects' }, ...projects]}
@@ -255,7 +255,7 @@ export const TasksScreen = () => {
 
       {loading && !refreshing ? (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#4f46e5" />
+          <ActivityIndicator size="large" color="#1769B1" />
         </View>
       ) : (
         <FlatList
@@ -270,7 +270,7 @@ export const TasksScreen = () => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmptyComponent}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#4f46e5']} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#1769B1']} />
           }
         />
       )}
@@ -288,9 +288,9 @@ export const TasksScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0B1020' },
+  container: { flex: 1, backgroundColor: '#F4F7FB' },
   header: {
-    backgroundColor: '#141E32',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   clearButton: { padding: 4 },
   clearButtonText: { color: '#6b7280', fontSize: 16, fontWeight: 'bold' },
@@ -345,7 +345,7 @@ const styles = StyleSheet.create({
   },
   filterPillActive: { backgroundColor: '#e0e7ff' },
   filterText: { fontSize: 13, color: '#4b5563', fontWeight: '500' },
-  filterTextActive: { color: '#4f46e5' },
+  filterTextActive: { color: '#1769B1' },
   listContent: { padding: 16, flexGrow: 1 },
   centerContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 24 },
   emptyText: { fontSize: 16, color: '#6b7280', textAlign: 'center' },
@@ -354,18 +354,18 @@ const styles = StyleSheet.create({
   retryText: { fontSize: 14, color: '#4b5563', fontWeight: '500' },
   fab: {
     position: 'absolute', right: 20, bottom: Platform.OS === 'ios' ? 40 : 20,
-    backgroundColor: '#4f46e5', width: 56, height: 56, borderRadius: 28,
+    backgroundColor: '#1769B1', width: 56, height: 56, borderRadius: 28,
     justifyContent: 'center', alignItems: 'center', shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.2, shadowRadius: 4, elevation: 4,
   },
   fabText: { fontSize: 28, color: '#fff', lineHeight: 32 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
-  modalContent: { backgroundColor: '#141E32', borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
-  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: '#F7F8FF' },
+  modalContent: { backgroundColor: '#FFFFFF', borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
+  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: '#162B46' },
   modalItem: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
-  modalItemActive: { backgroundColor: '#0B1020' },
+  modalItemActive: { backgroundColor: '#F4F7FB' },
   modalItemText: { fontSize: 16, color: '#374151' },
-  modalItemTextActive: { color: '#4f46e5', fontWeight: '600' },
+  modalItemTextActive: { color: '#1769B1', fontWeight: '600' },
   modalCloseButton: { marginTop: 16, paddingVertical: 14, alignItems: 'center', backgroundColor: '#f3f4f6', borderRadius: 8 },
   modalCloseText: { fontSize: 16, fontWeight: '600', color: '#374151' },
 });
