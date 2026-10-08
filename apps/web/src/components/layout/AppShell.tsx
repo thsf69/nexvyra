@@ -37,12 +37,14 @@ export const AppShell = ({ children }: { children: React.ReactNode }) => {
     { name: 'Dashboard', href: '/dashboard' },
     { name: 'Projects', href: '/projects' },
     { name: 'Tasks', href: '/tasks' },
+    { name: 'Account', href: '/account' },
   ];
 
   let pageTitle = 'NEXVYRA';
   if (pathname.startsWith('/dashboard')) pageTitle = 'Dashboard';
   else if (pathname.startsWith('/projects')) pageTitle = 'Projects';
   else if (pathname.startsWith('/tasks')) pageTitle = 'Tasks';
+  else if (pathname.startsWith('/account')) pageTitle = 'Account';
 
   const NavLinks = () => (
     <>
