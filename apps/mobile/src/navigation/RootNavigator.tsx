@@ -126,7 +126,8 @@ const BottomNavigation = ({ activeRoute, onNavigate }: {
   const insets = useSafeAreaInsets();
   const { tokens, isDark } = useTheme();
   return (
-    <View style={[styles.tabBar, { backgroundColor: tokens.surface, borderTopColor: tokens.border, paddingBottom: Math.max(insets.bottom, 8) }]}>
+    <View style={[styles.floatingDockArea, { paddingBottom: Math.max(insets.bottom, 12), backgroundColor: tokens.background }]}>
+    <View style={[styles.tabBar, { backgroundColor: tokens.surface, borderColor: tokens.border, shadowColor: isDark ? '#000000' : '#173657' }]}>
       {PRIMARY_SCREENS.map(route => {
         const selected = activeRoute === route;
         const icon = route === 'Dashboard' ? '▦' : route === 'Projects' ? '▤' : route === 'Tasks' ? '☑' : '◉';
@@ -140,6 +141,7 @@ const BottomNavigation = ({ activeRoute, onNavigate }: {
           </TouchableOpacity>
         );
       })}
+    </View>
     </View>
   );
 };
@@ -178,9 +180,10 @@ const styles = StyleSheet.create({
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 9 },
   brandIcon: { width: 30, height: 30, borderRadius: 7 },
   brandName: { fontSize: 17, fontWeight: '800', color: '#1769B1', letterSpacing: 1.6 },
-  tabBar: { flexDirection: 'row', borderTopWidth: 1, paddingTop: 7, paddingHorizontal: 4, elevation: 8 },
-  tabItem: { flex: 1, minHeight: 54, alignItems: 'center', justifyContent: 'center' },
-  tabIconContainer: { width: 49, height: 29, borderRadius: 12, alignItems: 'center', justifyContent: 'center' },
+  floatingDockArea: { paddingTop: 8, paddingHorizontal: 18 },
+  tabBar: { flexDirection: 'row', borderWidth: 1, paddingVertical: 8, paddingHorizontal: 6, borderRadius: 26, shadowOffset: { width: 0, height: 5 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 12 },
+  tabItem: { flex: 1, minHeight: 52, alignItems: 'center', justifyContent: 'center' },
+  tabIconContainer: { width: 49, height: 29, borderRadius: 16, alignItems: 'center', justifyContent: 'center' },
   tabIcon: { fontSize: 22, lineHeight: 27 },
   tabLabel: { fontSize: 10, marginTop: 3 },
   accountContent: { padding: 18, paddingBottom: 32 },
