@@ -63,11 +63,12 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
     );
   }
 
-  if (error || !project) {
+  if (!project) {
     return (
       <AppShell>
-        <div className="max-w-4xl mx-auto">
-          <div className="p-4 text-red-700 bg-red-50 rounded-md border border-red-100">
+        <div className="mx-auto max-w-5xl">
+        {error && <div role="alert" className="mb-5 rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-600 dark:text-red-300">{error}</div>}
+          <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-red-600 dark:text-red-300">
             {error || 'Project not found.'}
           </div>
           <div className="mt-4">
@@ -87,10 +88,10 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
           </Link>
         </div>
 
-        <div className="bg-surface rounded-xl shadow-sm border border-border overflow-hidden mb-8">
-          <div className="px-4 py-5 sm:px-6 flex justify-between items-start">
+        <div className="nex-glass mb-8 overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-sm">
+          <div className="flex flex-wrap items-start justify-between gap-4 bg-gradient-to-r from-primary/10 via-primary/5 to-transparent px-5 py-7 sm:px-8">
             <div>
-              <h3 className="text-2xl leading-6 font-bold text-text break-words">{project.name}</h3>
+              <h3 className="break-words text-2xl font-bold leading-tight tracking-tight text-text sm:text-3xl">{project.name}</h3>
               <p className="mt-2 max-w-2xl text-sm text-text-secondary">
                 Created on {new Date(project.createdAt).toLocaleDateString()}
               </p>
@@ -99,36 +100,36 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
               <ProjectStatusBadge status={project.status} />
             </div>
           </div>
-          <div className="border-t border-border px-4 py-5 sm:p-6 space-y-6">
+          <div className="space-y-7 border-t border-border/70 px-5 py-6 sm:px-8 sm:py-8">
             <div>
-              <h4 className="text-sm font-medium text-text-secondary">Description</h4>
-              <p className="mt-1 text-sm text-text whitespace-pre-wrap">
+              <h4 className="text-xs font-bold uppercase tracking-[.14em] text-text-secondary">Description</h4>
+              <p className="mt-3 whitespace-pre-wrap text-sm leading-7 text-text">
                 {project.description || <span className="italic text-text-secondary">No description provided.</span>}
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <h4 className="text-sm font-medium text-text-secondary">Start Date</h4>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="rounded-xl border border-border/70 bg-background/50 p-5">
+                <h4 className="text-xs font-bold uppercase tracking-[.14em] text-text-secondary">Start Date</h4>
                 <p className="mt-1 text-sm text-text">{project.startDate ? new Date(project.startDate).toLocaleDateString() : 'N/A'}</p>
               </div>
-              <div>
-                <h4 className="text-sm font-medium text-text-secondary">End Date</h4>
+              <div className="rounded-xl border border-border/70 bg-background/50 p-5">
+                <h4 className="text-xs font-bold uppercase tracking-[.14em] text-text-secondary">End Date</h4>
                 <p className="mt-1 text-sm text-text">{project.endDate ? new Date(project.endDate).toLocaleDateString() : 'N/A'}</p>
               </div>
             </div>
 
-            <div className="pt-6 border-t border-border mt-6 flex justify-end space-x-3">
+            <div className="mt-6 flex flex-wrap justify-end gap-3 border-t border-border/70 pt-6">
               <button
                 onClick={handleDelete}
                 disabled={isDeleting}
-                className="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 disabled:opacity-70"
+                className="rounded-xl border border-red-500/20 bg-red-500/10 px-5 py-2.5 text-sm font-semibold text-red-600 transition hover:bg-red-500/20 disabled:opacity-60 dark:text-red-300"
               >
                 {isDeleting ? 'Deleting...' : 'Delete Project'}
               </button>
               <Link
                 href={`/projects/${project.id}/edit`}
-                className="px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:opacity-90"
+                className="nex-gradient rounded-xl px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
               >
                 Edit Project
               </Link>
@@ -137,23 +138,23 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
         </div>
 
         {/* Phase 11 Task View */}
-        <div className="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
-          <div className="px-4 py-5 sm:px-6 border-b border-border flex justify-between items-center">
-            <h3 className="text-lg leading-6 font-medium text-text">Tasks</h3>
+        <div className="nex-glass overflow-hidden rounded-2xl border border-border/70 bg-surface shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border/70 px-5 py-5 sm:px-8">
+            <h3 className="text-lg font-bold tracking-tight text-text">Tasks</h3>
             <div className="flex space-x-3">
               <Link href={`/tasks?projectId=${project.id}`} className="text-sm text-text-secondary hover:text-text font-medium py-1">
                 View All
               </Link>
               <Link
                 href={`/tasks/new?projectId=${project.id}`}
-                className="inline-flex items-center px-3 py-1 border border-transparent text-sm font-medium rounded-md text-primary bg-primary/20 hover:bg-indigo-200"
+                className="inline-flex items-center rounded-xl bg-primary/10 px-4 py-2 text-sm font-semibold text-primary transition hover:bg-primary/20"
               >
                 Create Task
               </Link>
             </div>
           </div>
           {tasks.length === 0 ? (
-            <div className="p-8 text-center">
+            <div className="p-10 text-center">
               <p className="text-sm text-text-secondary mb-2">No tasks in this project yet.</p>
               <Link href={`/tasks/new?projectId=${project.id}`} className="text-primary hover:text-primary text-sm font-medium">
                 Create one now
@@ -162,7 +163,7 @@ export default function ProjectDetailsPage({ params }: { params: { id: string } 
           ) : (
             <ul className="divide-y divide-border">
               {tasks.map((task) => (
-                <li key={task.id} className="px-4 py-4 sm:px-6 hover:bg-background">
+                <li key={task.id} className="px-5 py-4 transition hover:bg-primary/5 sm:px-8">
                   <div className="flex items-center justify-between">
                     <div className="flex-1 min-w-0">
                       <p className="text-sm font-medium text-primary truncate mb-1">
