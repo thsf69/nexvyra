@@ -85,7 +85,7 @@ function ProjectsListContent() {
 
   return (
     <>
-      <div className="bg-surface p-4 rounded-xl shadow-sm border border-border mb-6">
+      <div className="nex-glass p-4 sm:p-5 rounded-2xl border border-border mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <label htmlFor="search" className="sr-only">Search projects</label>
@@ -95,7 +95,7 @@ function ProjectsListContent() {
               placeholder="Search projects..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
+              className="block w-full border border-border bg-background/70 text-text rounded-xl py-3 px-4 outline-none transition focus:ring-2 focus:ring-primary/30 focus:border-primary sm:text-sm"
             />
           </div>
           <div className="sm:w-64">
@@ -104,7 +104,7 @@ function ProjectsListContent() {
               id="status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
+              className="block w-full border border-border bg-background/70 text-text rounded-xl py-3 px-4 outline-none transition focus:ring-2 focus:ring-primary/30 focus:border-primary sm:text-sm"
             >
               <option value="">All Statuses</option>
               <option value="NOT_STARTED">Not Started</option>
@@ -149,9 +149,9 @@ function ProjectsListContent() {
       )}
 
       {isLoading ? (
-        <div className="text-center py-12 text-text-secondary animate-pulse">Loading projects...</div>
+        <div className="nex-glass rounded-2xl text-center py-12 text-text-secondary animate-pulse">Loading projects...</div>
       ) : projects.length === 0 ? (
-        <div className="bg-surface rounded-xl shadow-sm border border-border p-12 text-center">
+        <div className="nex-glass rounded-2xl border border-dashed border-border p-12 text-center">
           {searchTerm || statusFilter ? (
             <p className="text-text-secondary">No projects match your current filters.</p>
           ) : (
@@ -164,14 +164,14 @@ function ProjectsListContent() {
           )}
         </div>
       ) : (
-        <div className="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
+        <div className="nex-glass rounded-2xl border border-border overflow-hidden">
           <ul className="divide-y divide-border">
             {projects.map((project) => (
               <li key={project.id}>
-                <div className="px-4 py-4 sm:px-6 flex items-center justify-between">
+                <div className="px-4 py-5 sm:px-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between transition-colors hover:bg-primary/5">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center justify-between mb-1">
-                      <p className="text-sm font-medium text-primary truncate">
+                      <p className="text-sm font-semibold text-text truncate">
                         {project.name}
                       </p>
                       <div className="ml-2 flex-shrink-0">
@@ -190,21 +190,21 @@ function ProjectsListContent() {
                       </div>
                       <div className="mt-2 flex items-center text-sm text-text-secondary sm:mt-0">
                         <p>
-                          {new Date(project.startDate || '').toLocaleDateString()} &mdash; {new Date(project.endDate || '').toLocaleDateString()}
+                          {(project.startDate ? new Date(project.startDate).toLocaleDateString() : "No start date")} &mdash; {(project.endDate ? new Date(project.endDate).toLocaleDateString() : "No end date")}
                         </p>
                       </div>
                     </div>
                   </div>
-                  <div className="ml-5 flex-shrink-0 flex space-x-2">
+                  <div className="sm:ml-5 flex-shrink-0 flex gap-2">
                     <Link
                       href={`/projects/${project.id}`}
-                      className="text-sm text-primary hover:text-primary font-medium"
+                      className="inline-flex items-center rounded-lg bg-primary/10 px-3 py-2 text-sm font-semibold text-primary transition hover:bg-primary/20"
                     >
                       View
                     </Link>
                     <Link
                       href={`/projects/${project.id}/edit`}
-                      className="text-sm text-text-secondary hover:text-text font-medium"
+                      className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-secondary transition hover:bg-background hover:text-text"
                     >
                       Edit
                     </Link>
@@ -222,18 +222,19 @@ function ProjectsListContent() {
 export default function ProjectsPage() {
   return (
     <AppShell>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
+      <div className="max-w-7xl mx-auto pb-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end mb-7">
           <div>
-            <h1 className="text-3xl font-bold text-text">Projects</h1>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[.22em] text-primary">Workspace / Portfolio</p>
+            <h1 className="text-3xl font-bold tracking-tight text-text">Projects</h1>
             <p className="mt-1 text-sm text-text-secondary">Manage your projects, track progress, and keep work organized.</p>
           </div>
           <div className="mt-4 sm:mt-0">
             <Link
               href="/projects/new"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:opacity-90"
+              className="nex-gradient inline-flex items-center justify-center px-5 py-3 rounded-xl shadow-lg shadow-violet-500/10 text-sm font-semibold text-white transition hover:opacity-90"
             >
-              Create Project
+              + New project
             </Link>
           </div>
         </div>
