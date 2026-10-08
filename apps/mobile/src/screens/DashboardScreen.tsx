@@ -131,7 +131,7 @@ export const DashboardScreen = () => {
 
 const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create({
   container: { flex: 1, backgroundColor: tokens.background },
-  header: { paddingHorizontal: 20, paddingTop: 28, paddingBottom: 24 },
+  header: { paddingHorizontal: 20, paddingTop: 22, paddingBottom: 18 },
   brandText: { fontSize: 11, letterSpacing: 2, fontWeight: '800', color: tokens.primary, marginBottom: 12 },
   greetingText: { fontSize: 26, fontWeight: '800', color: tokens.text, lineHeight: 34 },
   highlight: { color: tokens.primary },
@@ -164,7 +164,7 @@ const createStyles = (tokens: ThemeTokens, isDark: boolean) => StyleSheet.create
   rowMeta: { color: tokens.primary, fontSize: 10, marginTop: 5, textTransform: 'capitalize' },
   rowArrow: { color: tokens.textSecondary, fontSize: 22 },
   emptyText: { color: tokens.textSecondary, fontSize: 13, paddingVertical: 12, lineHeight: 20 },
-  progressCenter: { width: 124, height: 124, borderRadius: 62, borderWidth: 9, borderColor: tokens.primary, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginVertical: 20, backgroundColor: '#111B2E' },
+  progressCenter: { width: 124, height: 124, borderRadius: 62, borderWidth: 9, borderColor: tokens.primary, alignSelf: 'center', alignItems: 'center', justifyContent: 'center', marginVertical: 14, backgroundColor: tokens.background },
   progressNumber: { color: tokens.text, fontSize: 29, fontWeight: '800' },
   progressBarBackground: { height: 7, backgroundColor: tokens.border, borderRadius: 5, overflow: 'hidden', marginBottom: 18 },
   progressBarFill: { height: '100%', backgroundColor: tokens.primary, borderRadius: 5 },
