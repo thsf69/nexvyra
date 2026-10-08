@@ -31,12 +31,15 @@ const AuthNavigator = () => (
   </AuthStack.Navigator>
 );
 
-const BrandTitle = () => (
+const BrandTitle = () => {
+  const { tokens } = useTheme();
+  return (
   <View style={styles.brandRow}>
-    <Image source={require('../../assets/icon.png')} style={styles.brandIcon} resizeMode="contain" accessibilityLabel="NEXVYRA logo" />
-    <Text style={styles.brandName}>NEXVYRA</Text>
+    <View style={[styles.brandMark, { backgroundColor: tokens.primary }]}><Text style={styles.brandMarkLetter}>N</Text></View>
+    <Text style={[styles.brandName, { color: tokens.text }]}>NEXVYRA</Text>
   </View>
-);
+  );
+};
 
 const AccountScreen = () => {
   const { user, logout } = useAuth();
@@ -184,7 +187,8 @@ const styles = StyleSheet.create({
   loadingContainer: { flex: 1, justifyContent: 'center', alignItems: 'center' },
   loadingText: { marginTop: 16, fontSize: 16 },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 9 },
-  brandIcon: { width: 30, height: 30, borderRadius: 7 },
+  brandMark: { width: 32, height: 32, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
+  brandMarkLetter: { color: '#FFFFFF', fontWeight: '900', fontSize: 19 },
   brandName: { fontSize: 17, fontWeight: '800', color: '#1769B1', letterSpacing: 1.6 },
   floatingDockArea: { paddingTop: 8, paddingHorizontal: 18 },
   tabBar: { flexDirection: 'row', borderWidth: 1, paddingVertical: 8, paddingHorizontal: 6, borderRadius: 26, shadowOffset: { width: 0, height: 5 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 12 },
