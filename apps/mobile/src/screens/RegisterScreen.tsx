@@ -193,7 +193,7 @@ export const RegisterScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   scrollContainer: {
     flexGrow: 1,
@@ -210,13 +210,13 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#F7F8FF',
+    color: '#162B46',
     marginBottom: 8,
     textAlign: 'center',
   },
   subtitle: {
     fontSize: 16,
-    color: '#A6B3CC',
+    color: '#637991',
     textAlign: 'center',
   },
   errorContainer: {
@@ -238,26 +238,26 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 14,
     fontWeight: '500',
-    color: '#DCE4F6',
+    color: '#263E59',
     marginBottom: 6,
   },
   input: {
-    backgroundColor: '#19243B',
-    borderColor: '#34405B',
+    backgroundColor: '#FFFFFF',
+    borderColor: '#CBD7E5',
     borderWidth: 1,
     borderRadius: 8,
     paddingHorizontal: 12,
     paddingVertical: 12,
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   helperText: {
     fontSize: 12,
-    color: '#A6B3CC',
+    color: '#637991',
     marginTop: 4,
   },
   button: {
-    backgroundColor: '#7254D7',
+    backgroundColor: '#1769B1',
     borderRadius: 8,
     paddingVertical: 14,
     alignItems: 'center',
@@ -279,11 +279,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   footerText: {
-    color: '#A6B3CC',
+    color: '#637991',
     fontSize: 14,
   },
   linkText: {
-    color: '#7254D7',
+    color: '#1769B1',
     fontSize: 14,
     fontWeight: '500',
   },
