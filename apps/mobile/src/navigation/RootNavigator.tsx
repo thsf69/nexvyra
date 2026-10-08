@@ -139,7 +139,7 @@ const BottomNavigation = ({ activeRoute, onNavigate }: {
           <TouchableOpacity key={route} style={styles.tabItem} onPress={() => onNavigate(route)}
             accessibilityRole="tab" accessibilityState={{ selected }} accessibilityLabel={route} activeOpacity={0.75}>
             <View style={[styles.tabIconContainer, selected && { backgroundColor: isDark ? '#30264B' : '#F0E9FF' }]}>
-              <Feather name={icon} size={21} strokeWidth={2.2} color={selected ? tokens.primary : tokens.textSecondary} />
+              <Feather name={icon} size={21} color={selected ? tokens.primary : tokens.textSecondary} />
             </View>
             <Text style={[styles.tabLabel, { color: selected ? tokens.primary : tokens.textSecondary, fontWeight: selected ? '800' : '600' }]}>{route}</Text>
           </TouchableOpacity>
