@@ -1,16 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
-  
-  <defs>
-    <linearGradient id="aurora" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#14B8A6" />
-      <stop offset="50%" stop-color="#167CBA" />
-      <stop offset="100%" stop-color="#6474D9" />
-    </linearGradient>
-  </defs>
-
-  <g transform="translate(50, 50) scale(0.6)">
-    <path d="M110,400 L110,112 L200,112 L392,344 L392,112 L456,112 L456,400 L376,400 L184,168 L184,400 Z" fill="url(#aurora)" />
-  </g>
-  <text x="400" y="200" font-family="Arial, Helvetica, sans-serif" font-size="140" font-weight="bold" fill="#F1F7FF" letter-spacing="10">NEXVYRA</text>
-  <text x="410" y="270" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="normal" fill="#A5BCD1">Connected Work, Clearly Managed.</text>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 160" role="img" aria-labelledby="title"><title id="title">NEXVYRA</title><g font-family="Arial, Helvetica, sans-serif" font-size="112" font-weight="800" letter-spacing="3"><text x="12" y="117" fill="#f5f6fc">NE</text><text x="192" y="117" fill="#a895ff">X</text><text x="276" y="117" fill="#f5f6fc">VYRA</text></g><path d="M211 20 L224 20 L256 56 L244 70 Z" fill="#a895ff" opacity=".55"/></svg>
