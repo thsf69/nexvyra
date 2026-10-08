@@ -60,12 +60,12 @@ export const TaskCard = ({ task, onPress }: Props) => {
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#fff',
-    borderRadius: 12,
-    padding: 16,
+    backgroundColor: '#19243B',
+    borderRadius: 18,
+    padding: 19,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 1 },
     shadowOpacity: 0.05,
@@ -82,29 +82,29 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 18,
     fontWeight: '600',
-    color: '#111827',
+    color: '#F7F8FF',
     marginRight: 12,
   },
   titleCompleted: {
     textDecorationLine: 'line-through',
-    color: '#9ca3af',
+    color: '#8593AF',
   },
   description: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#A6B3CC',
     marginBottom: 16,
     lineHeight: 20,
   },
   emptyDescription: {
     fontStyle: 'italic',
-    color: '#9ca3af',
+    color: '#8593AF',
   },
   footer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderTopWidth: 1,
-    borderTopColor: '#f3f4f6',
+    borderTopColor: '#2C3852',
     paddingTop: 12,
   },
   badgeRow: {
@@ -115,13 +115,13 @@ const styles = StyleSheet.create({
   },
   dateLabel: {
     fontSize: 12,
-    color: '#6b7280',
+    color: '#9BAAC5',
     fontWeight: '500',
     marginBottom: 2,
   },
   dateValue: {
     fontSize: 13,
-    color: '#374151',
+    color: '#DCE4F6',
     fontWeight: '500',
   },
   overdueDate: {
