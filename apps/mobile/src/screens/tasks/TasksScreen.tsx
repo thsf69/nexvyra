@@ -288,9 +288,9 @@ export const TasksScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f9fafb' },
+  container: { flex: 1, backgroundColor: '#0B1020' },
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#141E32',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#111827',
+    color: '#F7F8FF',
   },
   clearButton: { padding: 4 },
   clearButtonText: { color: '#6b7280', fontSize: 16, fontWeight: 'bold' },
@@ -360,10 +360,10 @@ const styles = StyleSheet.create({
   },
   fabText: { fontSize: 28, color: '#fff', lineHeight: 32 },
   modalOverlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.5)', justifyContent: 'flex-end' },
-  modalContent: { backgroundColor: '#fff', borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
-  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: '#111827' },
+  modalContent: { backgroundColor: '#141E32', borderTopLeftRadius: 16, borderTopRightRadius: 16, padding: 20, maxHeight: '70%' },
+  modalTitle: { fontSize: 18, fontWeight: '600', marginBottom: 16, color: '#F7F8FF' },
   modalItem: { paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: '#f3f4f6' },
-  modalItemActive: { backgroundColor: '#f9fafb' },
+  modalItemActive: { backgroundColor: '#0B1020' },
   modalItemText: { fontSize: 16, color: '#374151' },
   modalItemTextActive: { color: '#4f46e5', fontWeight: '600' },
   modalCloseButton: { marginTop: 16, paddingVertical: 14, alignItems: 'center', backgroundColor: '#f3f4f6', borderRadius: 8 },
