@@ -109,7 +109,7 @@ export const ProjectDetailScreen = () => {
   if (loading && !refreshing) {
     return (
       <View style={styles.centerContainer}>
-        <ActivityIndicator size="large" color="#4f46e5" />
+        <ActivityIndicator size="large" color="#7254D7" />
       </View>
     );
   }
@@ -128,7 +128,7 @@ export const ProjectDetailScreen = () => {
   return (
     <ScrollView 
       style={styles.container}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#4f46e5']} />}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#7254D7']} />}
     >
       <View style={styles.content}>
         <View style={styles.header}>
@@ -203,14 +203,14 @@ export const ProjectDetailScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 24,
-    backgroundColor: '#f9fafb',
+    backgroundColor: '#0B1020',
   },
   content: {
     padding: 20,
@@ -221,7 +221,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 28,
     fontWeight: 'bold',
-    color: '#111827',
+    color: '#F7F8FF',
     marginBottom: 12,
   },
   section: {
@@ -230,12 +230,12 @@ const styles = StyleSheet.create({
   sectionTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#374151',
+    color: '#DCE4F6',
     marginBottom: 8,
   },
   description: {
     fontSize: 16,
-    color: '#4b5563',
+    color: '#A6B3CC',
     lineHeight: 24,
   },
   emptyDescription: {
@@ -243,10 +243,10 @@ const styles = StyleSheet.create({
     color: '#9ca3af',
   },
   detailsCard: {
-    backgroundColor: '#fff',
+    backgroundColor: '#19243B',
     borderRadius: 12,
     borderWidth: 1,
-    borderColor: '#e5e7eb',
+    borderColor: '#2C3852',
     marginBottom: 32,
     overflow: 'hidden',
   },
@@ -258,17 +258,17 @@ const styles = StyleSheet.create({
   },
   detailRowBorder: {
     borderTopWidth: 1,
-    borderTopColor: '#f3f4f6',
+    borderTopColor: '#26314A',
   },
   detailLabel: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#6b7280',
+    color: '#A6B3CC',
   },
   detailValue: {
     fontSize: 15,
     fontWeight: '500',
-    color: '#111827',
+    color: '#F7F8FF',
   },
   actionsContainer: {
     gap: 12, // For RN >= 0.71
@@ -280,18 +280,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   tasksButtonText: {
-    color: '#fff',
+    color: '#19243B',
     fontSize: 16,
     fontWeight: '600',
   },
   editButton: {
-    backgroundColor: '#4f46e5',
+    backgroundColor: '#7254D7',
     paddingVertical: 14,
     borderRadius: 8,
     alignItems: 'center',
   },
   editButtonText: {
-    color: '#fff',
+    color: '#19243B',
     fontSize: 16,
     fontWeight: '600',
   },
@@ -321,12 +321,12 @@ const styles = StyleSheet.create({
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#f3f4f6',
+    backgroundColor: '#26314A',
     borderRadius: 6,
   },
   retryText: {
     fontSize: 14,
-    color: '#4b5563',
+    color: '#A6B3CC',
     fontWeight: '500',
   },
 });
