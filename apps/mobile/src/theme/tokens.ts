@@ -1,23 +1,23 @@
 export const lightTokens = {
-  background: '#F7F9FC',
+  background: '#F7F7FC',
   surface: '#FFFFFF',
-  primary: '#2563EB',
-  text: '#17243A',
-  textSecondary: '#64748B',
-  success: '#14B8A6',
-  iris: '#6474D9',
-  border: '#E2E8F0', // minimal reusable utility
+  primary: '#7652DB',
+  text: '#192139',
+  textSecondary: '#66718A',
+  success: '#169F82',
+  iris: '#9B79F2',
+  border: '#E5E5F0', // minimal reusable utility
 };
 
 export const darkTokens = {
-  background: '#0B1220',
-  surface: '#172235',
-  primary: '#60A5FA',
-  text: '#F1F7FF',
-  textSecondary: '#A9BCD1',
-  success: '#5EEAD4',
-  iris: '#8996FF',
-  border: '#2A3F54',
+  background: '#101729',
+  surface: '#1B253B',
+  primary: '#B79AFF',
+  text: '#F7F7FF',
+  textSecondary: '#A9B2C8',
+  success: '#64D7B4',
+  iris: '#B79AFF',
+  border: '#303B53',
 };
 
 export type ThemeTokens = typeof lightTokens;
