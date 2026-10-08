@@ -32,7 +32,7 @@ export default function DashboardPage() {
   }, []);
 
   const renderMetricCard = (label: string, value: number, bgColor: string) => (
-    <div className="bg-surface rounded-xl shadow-sm border border-border p-6 flex flex-col hover:-translate-y-1 hover:shadow-md transition-all">
+    <div className="nex-glass rounded-2xl p-6 flex flex-col hover:-translate-y-1 hover:shadow-xl transition-all duration-300">
       <h3 className="text-sm font-medium text-text-secondary mb-1">{label}</h3>
       <div className="mt-2 flex items-baseline gap-2">
         <span className={`text-4xl font-bold tracking-tight text-text`}>{value}</span>
@@ -45,14 +45,14 @@ export default function DashboardPage() {
     <AppShell>
       <div className="max-w-7xl mx-auto space-y-8">
         <div>
-          <h1 className="text-3xl font-bold text-text">Welcome back, {user?.fullName?.split(' ')[0] || 'User'}</h1>
+          <h1 className="text-3xl sm:text-4xl font-bold tracking-tight text-text">Welcome back, <span className="nex-gradient-text">{user?.fullName?.split(' ')[0] || 'User'}</span></h1>
           <p className="mt-1 text-sm text-text-secondary">Overview of your workspace, tasks, and project progress.</p>
         </div>
 
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 animate-pulse">
             {[1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="bg-surface rounded-xl shadow-sm border border-border p-6 h-32">
+              <div key={i} className="nex-glass rounded-2xl p-6 h-32">
                 <div className="h-4 bg-gray-200 rounded w-1/2 mb-4"></div>
                 <div className="h-10 bg-gray-200 rounded w-1/4"></div>
               </div>
@@ -82,7 +82,7 @@ export default function DashboardPage() {
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Task Progress Summary */}
-              <div className="bg-surface rounded-xl shadow-sm border border-border p-6">
+              <div className="nex-glass rounded-2xl p-6">
                 <h2 className="text-lg font-bold text-text mb-4">Task Completion</h2>
                 {metrics.totalTasks === 0 ? (
                   <div className="text-center py-6">
@@ -114,7 +114,7 @@ export default function DashboardPage() {
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-surface rounded-xl shadow-sm border border-border p-6">
+              <div className="nex-glass rounded-2xl p-6">
                 <h2 className="text-lg font-bold text-text mb-4">Quick Actions</h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <Link
@@ -149,14 +149,14 @@ export default function DashboardPage() {
 
             {/* Empty States / Starter Call to Action */}
             {metrics.totalProjects === 0 && metrics.totalTasks === 0 && (
-              <div className="mt-8 bg-primary/10 border border-indigo-100 rounded-xl p-8 text-center">
-                <h2 className="text-xl font-bold text-indigo-900 mb-2">Welcome to NEXVYRA!</h2>
-                <p className="text-primary mb-6 max-w-lg mx-auto">
+              <div className="mt-8 nex-glass rounded-xl p-8 text-center">
+                <h2 className="text-xl font-bold text-text mb-2">Welcome to NEXVYRA!</h2>
+                <p className="text-text-secondary mb-6 max-w-lg mx-auto">
                   Your workspace is currently empty. Get started by creating your first project and adding tasks to track your work.
                 </p>
                 <Link
                   href="/projects/new"
-                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-primary hover:opacity-90"
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-white nex-gradient hover:opacity-90"
                 >
                   Create First Project
                 </Link>
