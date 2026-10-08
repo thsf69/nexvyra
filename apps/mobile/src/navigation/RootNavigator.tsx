@@ -36,8 +36,8 @@ const BrandTitle = () => {
   const { tokens } = useTheme();
   return (
   <View style={styles.brandRow}>
-    <View style={[styles.brandMark, { backgroundColor: tokens.primary }]}><Text style={styles.brandMarkLetter}>N</Text></View>
-    <Text style={[styles.brandName, { color: tokens.text }]}>NEXVYRA</Text>
+    <View style={[styles.brandMark, { backgroundColor: '#201935' }]}><Text style={[styles.brandMarkLetter, { color: '#B79AFF' }]}>X</Text></View>
+    <Text style={[styles.brandName, { color: tokens.text }]}>NE<Text style={{ color: tokens.primary }}>X</Text>VYRA</Text>
   </View>
   );
 };
@@ -76,7 +76,7 @@ const AccountScreen = () => {
             return (
               <TouchableOpacity key={option.mode} onPress={() => void setMode(option.mode)}
                 accessibilityRole="radio" accessibilityState={{ checked: selected }}
-                style={[styles.themeChoice, { borderColor: selected ? tokens.primary : tokens.border, backgroundColor: selected ? (mode === 'dark' ? '#243D58' : '#E8F2FC') : tokens.surface }]}>
+                style={[styles.themeChoice, { borderColor: selected ? tokens.primary : tokens.border, backgroundColor: selected ? (mode === 'dark' ? '#30264B' : '#F0E9FF') : tokens.surface }]}>
                 <Text style={[styles.themeSymbol, { color: selected ? tokens.primary : tokens.textSecondary }]}>{option.glyph}</Text>
                 <Text style={[styles.themeLabel, { color: selected ? tokens.primary : tokens.text }]}>{option.label}</Text>
                 <Text style={{ color: tokens.primary }}>{selected ? '●' : '○'}</Text>
@@ -189,7 +189,7 @@ const styles = StyleSheet.create({
   loadingText: { marginTop: 16, fontSize: 16 },
   brandRow: { flexDirection: 'row', alignItems: 'center', gap: 9 },
   brandMark: { width: 32, height: 32, borderRadius: 10, alignItems: 'center', justifyContent: 'center' },
-  brandMarkLetter: { color: '#FFFFFF', fontWeight: '900', fontSize: 19 },
+  brandMarkLetter: { color: '#B79AFF', fontWeight: '900', fontSize: 21 },
   brandName: { fontSize: 17, fontWeight: '800', color: '#1769B1', letterSpacing: 1.6 },
   floatingDockArea: { paddingTop: 8, paddingHorizontal: 18 },
   tabBar: { flexDirection: 'row', borderWidth: 1, paddingVertical: 10, paddingHorizontal: 6, borderRadius: 28, shadowOffset: { width: 0, height: 6 }, shadowOpacity: 0.12, shadowRadius: 18, elevation: 9 },
