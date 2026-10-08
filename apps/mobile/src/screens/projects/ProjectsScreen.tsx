@@ -163,7 +163,7 @@ export const ProjectsScreen = () => {
 
       {loading && !refreshing ? (
         <View style={styles.centerContainer}>
-          <ActivityIndicator size="large" color="#4f46e5" />
+          <ActivityIndicator size="large" color="#1769B1" />
         </View>
       ) : (
         <FlatList
@@ -178,7 +178,7 @@ export const ProjectsScreen = () => {
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={renderEmptyComponent}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#4f46e5']} />
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} colors={['#1769B1']} />
           }
         />
       )}
@@ -198,10 +198,10 @@ export const ProjectsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0B1020',
+    backgroundColor: '#F4F7FB',
   },
   header: {
-    backgroundColor: '#141E32',
+    backgroundColor: '#FFFFFF',
     padding: 16,
     borderBottomWidth: 1,
     borderBottomColor: '#e5e7eb',
@@ -209,7 +209,7 @@ const styles = StyleSheet.create({
   searchContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderRadius: 8,
     paddingHorizontal: 12,
     marginBottom: 12,
@@ -218,13 +218,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 40,
     fontSize: 16,
-    color: '#F7F8FF',
+    color: '#162B46',
   },
   clearButton: {
     padding: 4,
   },
   clearButtonText: {
-    color: '#A6B3CC',
+    color: '#637991',
     fontSize: 16,
     fontWeight: 'bold',
   },
@@ -236,7 +236,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 9999,
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     marginRight: 8,
     marginBottom: 8,
   },
@@ -245,11 +245,11 @@ const styles = StyleSheet.create({
   },
   filterText: {
     fontSize: 13,
-    color: '#A6B3CC',
+    color: '#637991',
     fontWeight: '500',
   },
   filterTextActive: {
-    color: '#4f46e5',
+    color: '#1769B1',
   },
   listContent: {
     padding: 16,
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
   },
   emptyText: {
     fontSize: 16,
-    color: '#A6B3CC',
+    color: '#637991',
     textAlign: 'center',
   },
   errorText: {
@@ -275,19 +275,19 @@ const styles = StyleSheet.create({
   retryButton: {
     paddingHorizontal: 16,
     paddingVertical: 8,
-    backgroundColor: '#26314A',
+    backgroundColor: '#EDF3FA',
     borderRadius: 6,
   },
   retryText: {
     fontSize: 14,
-    color: '#A6B3CC',
+    color: '#637991',
     fontWeight: '500',
   },
   fab: {
     position: 'absolute',
     right: 20,
     bottom: Platform.OS === 'ios' ? 40 : 20,
-    backgroundColor: '#4f46e5',
+    backgroundColor: '#1769B1',
     width: 56,
     height: 56,
     borderRadius: 28,
