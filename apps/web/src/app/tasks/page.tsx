@@ -109,7 +109,7 @@ function TasksListContent() {
 
   return (
     <>
-      <div className="bg-surface p-4 rounded-xl shadow-sm border border-border mb-6">
+      <div className="nex-glass p-4 sm:p-5 rounded-2xl border border-border mb-6">
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <label htmlFor="search" className="sr-only">Search tasks</label>
@@ -119,7 +119,7 @@ function TasksListContent() {
               placeholder="Search tasks..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
+              className="block w-full border border-border bg-background/70 text-text rounded-xl py-3 px-4 outline-none transition focus:ring-2 focus:ring-primary/30 focus:border-primary sm:text-sm"
             />
           </div>
           <div className="sm:w-48">
@@ -128,7 +128,7 @@ function TasksListContent() {
               id="status"
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
+              className="block w-full border border-border bg-background/70 text-text rounded-xl py-3 px-4 outline-none transition focus:ring-2 focus:ring-primary/30 focus:border-primary sm:text-sm"
             >
               <option value="">All Statuses</option>
               <option value="PENDING">Pending</option>
@@ -142,7 +142,7 @@ function TasksListContent() {
               id="priority"
               value={priorityFilter}
               onChange={(e) => setPriorityFilter(e.target.value)}
-              className="block w-full border border-border rounded-md shadow-sm py-2 px-3 focus:ring-primary focus:border-primary sm:text-sm"
+              className="block w-full border border-border bg-background/70 text-text rounded-xl py-3 px-4 outline-none transition focus:ring-2 focus:ring-primary/30 focus:border-primary sm:text-sm"
             >
               <option value="">All Priorities</option>
               <option value="LOW">Low</option>
@@ -189,9 +189,9 @@ function TasksListContent() {
       )}
 
       {isLoading ? (
-        <div className="text-center py-12 text-text-secondary animate-pulse">Loading tasks...</div>
+        <div className="nex-glass rounded-2xl text-center py-12 text-text-secondary animate-pulse">Loading tasks...</div>
       ) : tasks.length === 0 ? (
-        <div className="bg-surface rounded-xl shadow-sm border border-border p-12 text-center">
+        <div className="nex-glass rounded-2xl border border-dashed border-border p-12 text-center">
           {searchTerm || statusFilter || priorityFilter ? (
             <p className="text-text-secondary">No tasks match your current filters.</p>
           ) : (
@@ -204,11 +204,11 @@ function TasksListContent() {
           )}
         </div>
       ) : (
-        <div className="bg-surface rounded-xl shadow-sm border border-border overflow-hidden">
+        <div className="nex-glass rounded-2xl border border-border overflow-hidden">
           <ul className="divide-y divide-border">
             {tasks.map((task) => (
               <li key={task.id}>
-                <div className="px-4 py-4 sm:px-6 flex items-center justify-between">
+                <div className="px-4 py-5 sm:px-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between transition-colors hover:bg-primary/5">
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center space-x-3 mb-1">
                       <p className="text-sm font-medium text-text truncate">
@@ -239,16 +239,16 @@ function TasksListContent() {
                       </div>
                     </div>
                   </div>
-                  <div className="ml-5 flex-shrink-0 flex space-x-3">
+                  <div className="sm:ml-5 flex-shrink-0 flex gap-2">
                     <Link
                       href={`/tasks/${task.id}`}
-                      className="text-sm text-primary hover:text-primary font-medium"
+                      className="inline-flex items-center rounded-lg bg-primary/10 px-3 py-2 text-sm font-semibold text-primary transition hover:bg-primary/20"
                     >
                       View
                     </Link>
                     <Link
                       href={`/tasks/${task.id}/edit`}
-                      className="text-sm text-text-secondary hover:text-text font-medium"
+                      className="inline-flex items-center rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-secondary transition hover:bg-background hover:text-text"
                     >
                       Edit
                     </Link>
@@ -266,18 +266,19 @@ function TasksListContent() {
 export default function TasksPage() {
   return (
     <AppShell>
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-8">
+      <div className="max-w-7xl mx-auto pb-8">
+        <div className="flex flex-col gap-4 sm:flex-row sm:justify-between sm:items-end mb-7">
           <div>
-            <h1 className="text-3xl font-bold text-text">Tasks</h1>
+            <p className="mb-2 text-xs font-semibold uppercase tracking-[.22em] text-primary">Workspace / Execution</p>
+            <h1 className="text-3xl font-bold tracking-tight text-text">Tasks</h1>
             <p className="mt-1 text-sm text-text-secondary">Track work, priorities, and progress across your projects.</p>
           </div>
           <div className="mt-4 sm:mt-0">
             <Link
               href="/tasks/new"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:opacity-90"
+              className="nex-gradient inline-flex items-center justify-center px-5 py-3 rounded-xl shadow-lg shadow-violet-500/10 text-sm font-semibold text-white transition hover:opacity-90"
             >
-              Create Task
+              + New task
             </Link>
           </div>
         </div>
